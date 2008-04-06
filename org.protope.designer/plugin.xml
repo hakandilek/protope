@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+     <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            default="true"
+            name="%Protope_graphical_editor_name"
+            extensions="ui"
+            icon="protope.gif"
+            class="org.protope.designer.base.editor.DiagramEditor"
+            contributorClass="org.protope.designer.base.editor.BaseActionBarContributor"
+            id="org.protope.designer.PrototypeEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="%Protope_category_name"
+            id="org.protope.category">
+      </category>
+      <wizard
+            name="%Protope_wizard_name"
+            icon="protope.gif"
+            category="org.protope.category"
+            class="org.protope.designer.wizard.PrototypeCreationWizard"
+            id="org.protope.designer.wizard.new.prototype">
+         <description>
+            %Protope_wizard_description
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.ui"
+            id="org.protope.designer.ui">
+         <action
+               label="Print"
+               class="org.protope.designer.base.actions.DiagramPrintAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.protope.designer.ui.print">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
