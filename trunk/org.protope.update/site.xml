@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description url="http://protope.googlecode.com/svn/trunk/org.protope.update/site.xml">
+      Protope Update Site
+   </description>
+   <feature url="features/org.protope.designer_0.1.0.jar" id="org.protope.designer" version="0.1.0"/>
+</site>
