@@ -6,7 +6,7 @@ import org.eclipse.gef.commands.Command;
 import org.protope.designer.base.edit.BaseElementEditPolicy;
 import org.protope.designer.utils.NativeDropRequest;
 
-public class WImageEditPolicy extends BaseElementEditPolicy {
+public class WTextEditEditPolicy extends BaseElementEditPolicy {
 
 	public Command getCommand(Request request) {
 		return super.getCommand(request);

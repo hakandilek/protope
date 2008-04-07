@@ -8,31 +8,31 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package org.protope.designer.base.model.commands;
+package org.protope.designer.webbuk.model.commands;
 
 import org.eclipse.gef.commands.Command;
 import org.protope.designer.webbuk.model.WNote;
 
-public class UILabelCommand extends Command {
+public class WNoteTextCommand extends Command {
 
-	private String newName, oldName;
-	private WNote label;
+	private String newText, oldText;
+	private WNote note;
 
-	public UILabelCommand(WNote l, String s) {
-		label = l;
+	public WNoteTextCommand(WNote l, String s) {
+		note = l;
 		if (s != null)
-			newName = s;
+			newText = s;
 		else
-			newName = ""; //$NON-NLS-1$
+			newText = ""; //$NON-NLS-1$
 	}
 
 	public void execute() {
-		oldName = label.getLabelContents();
-		label.setLabelContents(newName);
+		oldText = note.getLabelContents();
+		note.setLabelContents(newText);
 	}
 
 	public void undo() {
-		label.setLabelContents(oldName);
+		note.setLabelContents(oldText);
 	}
 
 }

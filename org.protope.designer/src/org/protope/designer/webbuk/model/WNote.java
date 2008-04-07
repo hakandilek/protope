@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2000, 2005 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     IBM Corporation - initial API and implementation
- *******************************************************************************/
 package org.protope.designer.webbuk.model;
 
 import java.io.IOException;
@@ -22,7 +12,7 @@ public class WNote extends UIElementPart {
 
 	public static final String ICON_PATH = "icons/WNote16.gif"; //$NON-NLS-1$
 
-	private String text = ProtopeMessages.UIPlugin_Tool_CreationTool_Label;
+	private String text = ProtopeMessages.UIPlugin_Tool_CreationTool_WNote;
 
 	public static Image ICON = createImage(WNote.class, ICON_PATH);
 
@@ -65,7 +55,7 @@ public class WNote extends UIElementPart {
 	}
 
 	public String toString() {
-		return ProtopeMessages.UIPlugin_Tool_CreationTool_Label
+		return ProtopeMessages.UIPlugin_Tool_CreationTool_WNote
 				+ " #" + getID() + " " //$NON-NLS-1$ //$NON-NLS-2$
 				+ ProtopeMessages.PropertyDescriptor_Label_Text
 				+ "=" + getLabelContents(); //$NON-NLS-1$ 
