@@ -49,5 +49,17 @@
          </action>
       </objectContribution>
    </extension>
+   <extension
+         id="Protope"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="Protope UI Builder">
+         <property
+               name="appName"
+               value="Protope UI Builder">
+         </property>
+      </product>
+   </extension>
 
 </plugin>
