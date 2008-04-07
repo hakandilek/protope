@@ -3,19 +3,19 @@ package org.protope.designer.webbuk.edit;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.requests.DirectEditRequest;
-import org.protope.designer.webbuk.figures.WNoteFigure;
-import org.protope.designer.webbuk.model.WNote;
-import org.protope.designer.webbuk.model.commands.WNoteTextCommand;
+import org.protope.designer.webbuk.figures.WLabelFigure;
+import org.protope.designer.webbuk.model.WLabel;
+import org.protope.designer.webbuk.model.commands.WLabelTextCommand;
 
-public class WNoteDirectEditPolicy extends DirectEditPolicy {
+public class WLabelDirectEditPolicy extends DirectEditPolicy {
 
 	/**
 	 * @see DirectEditPolicy#getDirectEditCommand(DirectEditRequest)
 	 */
 	protected Command getDirectEditCommand(DirectEditRequest edit) {
 		String labelText = (String) edit.getCellEditor().getValue();
-		WNoteEditPart label = (WNoteEditPart) getHost();
-		WNoteTextCommand command = new WNoteTextCommand((WNote) label.getModel(),
+		WLabelEditPart label = (WLabelEditPart) getHost();
+		WLabelTextCommand command = new WLabelTextCommand((WLabel) label.getModel(),
 				labelText);
 		return command;
 	}
@@ -25,7 +25,7 @@ public class WNoteDirectEditPolicy extends DirectEditPolicy {
 	 */
 	protected void showCurrentEditValue(DirectEditRequest request) {
 		String value = (String) request.getCellEditor().getValue();
-		((WNoteFigure) getHostFigure()).setText(value);
+		((WLabelFigure) getHostFigure()).setText(value);
 		// hack to prevent async layout from placing the cell editor twice.
 		getHostFigure().getUpdateManager().performUpdate();
 

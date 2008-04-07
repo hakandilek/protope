@@ -7,19 +7,21 @@ import org.eclipse.swt.graphics.Image;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.i18n.ProtopeMessages;
 
-public class WImage extends UIElementPart {
+public class WLabel extends UIElementPart {
 	static final long serialVersionUID = 1;
 
-	public static final String ICON_PATH = "icons/WImage16.gif";//$NON-NLS-1$
+	public static final String ICON_PATH = "icons/WLabel16.gif";//$NON-NLS-1$
 
-	public static Image ICON = createImage(WImage.class, ICON_PATH);
+	private String text = ProtopeMessages.UIPlugin_Tool_CreationTool_WLabel;
+
+	public static Image ICON = createImage(WLabel.class, ICON_PATH);
 
 	private static int count;
 
-	public WImage() {
+	public WLabel() {
 		super();
 		size.width = 50;
-		size.height = 50;
+		size.height = 22;
 	}
 
 	public Image getIconImage() {
@@ -44,7 +46,18 @@ public class WImage extends UIElementPart {
 	}
 
 	public String toString() {
-		return ProtopeMessages.UIPlugin_Tool_CreationTool_WImage;
+		return ProtopeMessages.UIPlugin_Tool_CreationTool_WLabel;
 	}
 
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		String old = this.text;
+		this.text = text;
+		firePropertyChange("text", old, text); //$NON-NLS-1$
+	}
+
+	
 }

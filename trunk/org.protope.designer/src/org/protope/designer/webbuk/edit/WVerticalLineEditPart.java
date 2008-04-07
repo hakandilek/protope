@@ -18,7 +18,7 @@ public class WVerticalLineEditPart extends BaseEditPart {
 			}
 
 			public void getName(AccessibleEvent e) {
-				e.result = ProtopeMessages.UIPlugin_Tool_CreationTool_Image;
+				e.result = ProtopeMessages.UIPlugin_Tool_CreationTool_WVerticalLine;
 			}
 		};
 	}

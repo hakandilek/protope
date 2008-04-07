@@ -4,14 +4,14 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.tools.CellEditorLocator;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Text;
-import org.protope.designer.webbuk.figures.WNoteFigure;
+import org.protope.designer.webbuk.figures.WLabelFigure;
 
-final public class WNoteCellEditorLocator implements CellEditorLocator {
+final public class WLabelCellEditorLocator implements CellEditorLocator {
 
-	private WNoteFigure figure;
+	private WLabelFigure figure;
 
-	public WNoteCellEditorLocator(WNoteFigure figure) {
-		setLabel(figure);
+	public WLabelCellEditorLocator(WLabelFigure figure) {
+		setFigure(figure);
 	}
 
 	public void relocate(CellEditor celleditor) {
@@ -26,19 +26,19 @@ final public class WNoteCellEditorLocator implements CellEditorLocator {
 	}
 
 	/**
-	 * Returns the stickyNote figure.
+	 * Returns the button figure.
 	 */
-	protected WNoteFigure getLabel() {
+	protected WLabelFigure getFigure() {
 		return figure;
 	}
 
 	/**
-	 * Sets the Sticky note figure.
+	 * Sets the button figure.
 	 * 
 	 * @param figure
 	 *            The figure to set
 	 */
-	protected void setLabel(WNoteFigure figure) {
+	protected void setFigure(WLabelFigure figure) {
 		this.figure = figure;
 	}
 

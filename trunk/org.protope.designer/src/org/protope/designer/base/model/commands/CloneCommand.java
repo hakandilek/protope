@@ -23,6 +23,7 @@ import org.protope.designer.base.model.UIElement;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.base.model.UIGuide;
 import org.protope.designer.i18n.ProtopeMessages;
+import org.protope.designer.webbuk.model.WButton;
 import org.protope.designer.webbuk.model.WNote;
 
 public class CloneCommand extends Command {
@@ -66,6 +67,14 @@ public class CloneCommand extends Command {
 			newPart = new WNote();
 			((WNote) newPart).setLabelContents(((WNote) oldPart)
 					.getLabelContents());
+		}
+
+		if (oldPart instanceof WButton) {
+			newPart = new WButton();
+			((WButton) newPart).setText((((WButton) oldPart)
+					.getText()));
+			((WButton) newPart).setSelected((((WButton) oldPart)
+					.isSelected()));
 		}
 
 		if (oldPart instanceof UIDiagram) {

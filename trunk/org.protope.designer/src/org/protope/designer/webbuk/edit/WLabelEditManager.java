@@ -17,9 +17,9 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.CellEditorActionHandler;
-import org.protope.designer.webbuk.figures.WNoteFigure;
+import org.protope.designer.webbuk.figures.WLabelFigure;
 
-public class WNoteEditManager extends DirectEditManager {
+public class WLabelEditManager extends DirectEditManager {
 
 	private IActionBars actionBars;
 	private CellEditorActionHandler actionHandler;
@@ -32,7 +32,7 @@ public class WNoteEditManager extends DirectEditManager {
 		}
 	};
 
-	public WNoteEditManager(GraphicalEditPart source,
+	public WLabelEditManager(GraphicalEditPart source,
 			CellEditorLocator locator) {
 		super(source, null, locator);
 	}
@@ -74,7 +74,7 @@ public class WNoteEditManager extends DirectEditManager {
 
 	protected void initCellEditor() {
 		// update text
-		WNoteFigure figure = (WNoteFigure) getEditPart().getFigure();
+		WLabelFigure figure = (WLabelFigure) getEditPart().getFigure();
 		getCellEditor().setValue(figure.getText());
 		// update font
 		ZoomManager zoomMgr = (ZoomManager) getEditPart().getViewer()

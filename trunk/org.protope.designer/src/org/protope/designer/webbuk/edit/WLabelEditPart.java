@@ -11,19 +11,19 @@ import org.eclipse.swt.accessibility.AccessibleControlEvent;
 import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.protope.designer.base.edit.BaseEditPart;
 import org.protope.designer.i18n.ProtopeMessages;
-import org.protope.designer.webbuk.figures.WNoteFigure;
-import org.protope.designer.webbuk.model.WNote;
+import org.protope.designer.webbuk.figures.WLabelFigure;
+import org.protope.designer.webbuk.model.WLabel;
 
-public class WNoteEditPart extends BaseEditPart {
+public class WLabelEditPart extends BaseEditPart {
 
 	protected AccessibleEditPart createAccessible() {
 		return new AccessibleGraphicalEditPart() {
 			public void getValue(AccessibleControlEvent e) {
-				e.result = getLabel().getLabelContents();
+				e.result = getLabel().getText();
 			}
 
 			public void getName(AccessibleEvent e) {
-				e.result = ProtopeMessages.UIPlugin_Tool_CreationTool_WNote;
+				e.result = ProtopeMessages.UIPlugin_Tool_CreationTool_WLabel;
 			}
 		};
 	}
@@ -32,22 +32,23 @@ public class WNoteEditPart extends BaseEditPart {
 		super.createEditPolicies();
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, null);
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new WNoteDirectEditPolicy());
-		installEditPolicy(EditPolicy.COMPONENT_ROLE, new WNoteEditPolicy());
+				new WLabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.COMPONENT_ROLE, new WLabelEditPolicy());
 	}
 
 	protected IFigure createFigure() {
-		WNoteFigure label = new WNoteFigure();
-		return label;
+		WLabelFigure figure = new WLabelFigure();
+		figure.setText(getLabel().getText());
+		return figure;
 	}
 
-	private WNote getLabel() {
-		return (WNote) getModel();
+	private WLabel getLabel() {
+		return (WLabel) getModel();
 	}
 
 	private void performDirectEdit() {
-		new WNoteEditManager(this, new WNoteCellEditorLocator(
-				(WNoteFigure) getFigure())).show();
+		new WLabelEditManager(this, new WLabelCellEditorLocator(
+				(WLabelFigure) getFigure())).show();
 	}
 
 	public void performRequest(Request request) {
@@ -56,15 +57,14 @@ public class WNoteEditPart extends BaseEditPart {
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
-		if (evt.getPropertyName().equalsIgnoreCase("labelContents"))//$NON-NLS-1$
+		if (evt.getPropertyName().equalsIgnoreCase("text"))//$NON-NLS-1$
 			refreshVisuals();
 		else
 			super.propertyChange(evt);
 	}
 
 	protected void refreshVisuals() {
-		((WNoteFigure) getFigure()).setText(getLabel()
-				.getLabelContents());
+		((WLabelFigure) getFigure()).setText(getLabel().getText());
 		super.refreshVisuals();
 	}
 

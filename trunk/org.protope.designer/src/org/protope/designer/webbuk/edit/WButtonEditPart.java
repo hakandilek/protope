@@ -11,19 +11,19 @@ import org.eclipse.swt.accessibility.AccessibleControlEvent;
 import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.protope.designer.base.edit.BaseEditPart;
 import org.protope.designer.i18n.ProtopeMessages;
-import org.protope.designer.webbuk.figures.WNoteFigure;
-import org.protope.designer.webbuk.model.WNote;
+import org.protope.designer.webbuk.figures.WButtonFigure;
+import org.protope.designer.webbuk.model.WButton;
 
-public class WNoteEditPart extends BaseEditPart {
+public class WButtonEditPart extends BaseEditPart {
 
 	protected AccessibleEditPart createAccessible() {
 		return new AccessibleGraphicalEditPart() {
 			public void getValue(AccessibleControlEvent e) {
-				e.result = getLabel().getLabelContents();
+				e.result = getButton().getText();
 			}
 
 			public void getName(AccessibleEvent e) {
-				e.result = ProtopeMessages.UIPlugin_Tool_CreationTool_WNote;
+				e.result = ProtopeMessages.UIPlugin_Tool_CreationTool_WButton;
 			}
 		};
 	}
@@ -32,22 +32,24 @@ public class WNoteEditPart extends BaseEditPart {
 		super.createEditPolicies();
 		installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, null);
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new WNoteDirectEditPolicy());
-		installEditPolicy(EditPolicy.COMPONENT_ROLE, new WNoteEditPolicy());
+				new WButtonDirectEditPolicy());
+		installEditPolicy(EditPolicy.COMPONENT_ROLE, new WButtonEditPolicy());
 	}
 
 	protected IFigure createFigure() {
-		WNoteFigure label = new WNoteFigure();
-		return label;
+		WButtonFigure figure = new WButtonFigure();
+		figure.setText(getButton().getText());
+		figure.setSelected(getButton().isSelected());
+		return figure;
 	}
 
-	private WNote getLabel() {
-		return (WNote) getModel();
+	private WButton getButton() {
+		return (WButton) getModel();
 	}
 
 	private void performDirectEdit() {
-		new WNoteEditManager(this, new WNoteCellEditorLocator(
-				(WNoteFigure) getFigure())).show();
+		new WButtonEditManager(this, new WButtonCellEditorLocator(
+				(WButtonFigure) getFigure())).show();
 	}
 
 	public void performRequest(Request request) {
@@ -56,15 +58,17 @@ public class WNoteEditPart extends BaseEditPart {
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
-		if (evt.getPropertyName().equalsIgnoreCase("labelContents"))//$NON-NLS-1$
+		if (evt.getPropertyName().equalsIgnoreCase("selected"))//$NON-NLS-1$
+			refreshVisuals();
+		else if (evt.getPropertyName().equalsIgnoreCase("text"))//$NON-NLS-1$
 			refreshVisuals();
 		else
 			super.propertyChange(evt);
 	}
 
 	protected void refreshVisuals() {
-		((WNoteFigure) getFigure()).setText(getLabel()
-				.getLabelContents());
+		((WButtonFigure) getFigure()).setText(getButton().getText());
+		((WButtonFigure) getFigure()).setSelected((getButton().isSelected()));
 		super.refreshVisuals();
 	}
 

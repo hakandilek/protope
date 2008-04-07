@@ -7,18 +7,18 @@ import org.eclipse.swt.accessibility.AccessibleControlEvent;
 import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.protope.designer.base.edit.BaseEditPart;
 import org.protope.designer.i18n.ProtopeMessages;
-import org.protope.designer.webbuk.figures.WHorizontalLineFigure;
+import org.protope.designer.webbuk.figures.WTextEditFigure;
 
-public class WHorizontalLineEditPart extends BaseEditPart {
+public class WTextEditEditPart extends BaseEditPart {
 
 	protected AccessibleEditPart createAccessible() {
 		return new AccessibleGraphicalEditPart() {
 			public void getValue(AccessibleControlEvent e) {
-				e.result = "image";
+				e.result = "text";
 			}
 
 			public void getName(AccessibleEvent e) {
-				e.result = ProtopeMessages.UIPlugin_Tool_CreationTool_WHorizontalLine;
+				e.result = ProtopeMessages.UIPlugin_Tool_CreationTool_WTextEdit;
 			}
 		};
 	}
@@ -30,7 +30,7 @@ public class WHorizontalLineEditPart extends BaseEditPart {
 	}
 
 	protected IFigure createFigure() {
-		WHorizontalLineFigure figure = new WHorizontalLineFigure();
+		WTextEditFigure figure = new WTextEditFigure();
 		return figure;
 	}
 
