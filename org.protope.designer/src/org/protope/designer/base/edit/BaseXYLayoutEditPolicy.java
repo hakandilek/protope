@@ -35,7 +35,7 @@ import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.rulers.RulerProvider;
 import org.protope.designer.base.figures.LabelFeedbackFigure;
 import org.protope.designer.base.figures.ProtopeColorConstants;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.base.model.UIGuide;
 import org.protope.designer.base.model.commands.AddCommand;
@@ -96,7 +96,7 @@ public class BaseXYLayoutEditPolicy extends
 		Rectangle rect = (Rectangle) constraint;
 
 		AddCommand add = new AddCommand();
-		add.setParent((UIDiagram) getHost().getModel());
+		add.setParent((BaseDiagram) getHost().getModel());
 		add.setChild(part);
 		add.setLabel(ProtopeMessages.UIXYLayoutEditPolicy_AddCommandLabelText);
 		add.setDebugLabel("LogicXYEP add subpart");//$NON-NLS-1$
@@ -267,7 +267,7 @@ public class BaseXYLayoutEditPolicy extends
 	protected Command getCloneCommand(ChangeBoundsRequest request) {
 		CloneCommand clone = new CloneCommand();
 
-		clone.setParent((UIDiagram) getHost().getModel());
+		clone.setParent((BaseDiagram) getHost().getModel());
 
 		@SuppressWarnings("unchecked")
 		Iterator i = request.getEditParts().iterator();
@@ -304,7 +304,7 @@ public class BaseXYLayoutEditPolicy extends
 
 	protected Command getCreateCommand(CreateRequest request) {
 		CreateCommand create = new CreateCommand();
-		create.setParent((UIDiagram) getHost().getModel());
+		create.setParent((BaseDiagram) getHost().getModel());
 		UIElementPart newPart = (UIElementPart) request.getNewObject();
 		create.setChild(newPart);
 		Rectangle constraint = (Rectangle) getConstraintFor(request);

@@ -11,14 +11,14 @@
 package org.protope.designer.base.model.commands;
 
 import org.eclipse.gef.commands.Command;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.i18n.ProtopeMessages;
 
 public class AddCommand extends Command {
 
 	private UIElementPart child;
-	private UIDiagram parent;
+	private BaseDiagram parent;
 	private int index = -1;
 
 	public AddCommand() {
@@ -32,7 +32,7 @@ public class AddCommand extends Command {
 			parent.addChild(child, index);
 	}
 
-	public UIDiagram getParent() {
+	public BaseDiagram getParent() {
 		return parent;
 	}
 
@@ -51,7 +51,7 @@ public class AddCommand extends Command {
 		index = i;
 	}
 
-	public void setParent(UIDiagram newParent) {
+	public void setParent(BaseDiagram newParent) {
 		parent = newParent;
 	}
 

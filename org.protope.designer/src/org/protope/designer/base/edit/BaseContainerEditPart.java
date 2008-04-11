@@ -15,7 +15,7 @@ import java.util.List;
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.swt.accessibility.AccessibleEvent;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElement;
 
 /**
@@ -44,8 +44,8 @@ abstract public class BaseContainerEditPart extends BaseEditPart {
 	 * 
 	 * @return LogicDiagram of this.
 	 */
-	protected UIDiagram getDiagram() {
-		return (UIDiagram) getModel();
+	protected BaseDiagram getDiagram() {
+		return (BaseDiagram) getModel();
 	}
 
 	/**

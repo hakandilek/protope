@@ -11,7 +11,7 @@
 package org.protope.designer.base.model.commands;
 
 import org.eclipse.gef.commands.Command;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.base.model.UIGuide;
 import org.protope.designer.i18n.ProtopeMessages;
@@ -19,7 +19,7 @@ import org.protope.designer.i18n.ProtopeMessages;
 public class DeleteCommand extends Command {
 
 	private UIElementPart child;
-	private UIDiagram parent;
+	private BaseDiagram parent;
 	private UIGuide vGuide, hGuide;
 	private int vAlign, hAlign;
 	private int index = -1;
@@ -67,7 +67,7 @@ public class DeleteCommand extends Command {
 		child = c;
 	}
 
-	public void setParent(UIDiagram p) {
+	public void setParent(BaseDiagram p) {
 		parent = p;
 	}
 

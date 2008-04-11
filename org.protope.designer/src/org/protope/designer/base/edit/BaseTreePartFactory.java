@@ -12,14 +12,14 @@ package org.protope.designer.base.edit;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 
 public class BaseTreePartFactory
 	implements EditPartFactory
 {
 
 public EditPart createEditPart(EditPart context, Object model) {
-	if (model instanceof UIDiagram)
+	if (model instanceof BaseDiagram)
 		return new BaseContainerTreeEditPart(model);
 	return new BaseTreeEditPart(model);
 }

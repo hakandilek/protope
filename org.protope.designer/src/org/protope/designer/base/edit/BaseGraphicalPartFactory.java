@@ -12,19 +12,17 @@ package org.protope.designer.base.edit;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
-import org.protope.designer.base.model.UIDiagram;
-import org.protope.designer.buk.BukHandler;
-import org.protope.designer.webbuk.WebBukBag;
+import org.protope.designer.base.model.BaseDiagram;
+import org.protope.designer.tool.ToolHandler;
 
 public class BaseGraphicalPartFactory implements EditPartFactory {
 
 	public EditPart createEditPart(EditPart context, Object model) {
-		BukHandler handler = new BukHandler();
-		WebBukBag bag = WebBukBag.getInstance();
-		EditPart child = handler.getEditorFor(bag, model);
+		ToolHandler handler = new ToolHandler();
+		EditPart child = handler.getEditorFor(model);
 
-		if (child == null && model instanceof UIDiagram)
-			child = new UIDiagramEditPart();
+		if (child == null && model instanceof BaseDiagram)
+			child = new BaseDiagramEditPart();
 
 		if (child != null)
 			child.setModel(model);

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension-point id="diagram" name="Defines a diagram type for designer" schema="schema/diagram.exsd"/>
+   <extension-point id="palette" name="Designer palette" schema="schema/palette.exsd"/>
 
      <extension
          point="org.eclipse.ui.editors">
@@ -60,6 +62,88 @@
                value="Protope UI Builder">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.protope.designer.diagram">
+      <diagram
+            id="org.protope.designer.diagram.UI"
+            name="UI Diagram">
+         <paletteAssociation
+               paletteID="org.protope.designer.palette.Web">
+         </paletteAssociation>
+      </diagram>
+   </extension>
+   <extension
+         point="org.protope.designer.palette">
+      <palette
+            drawerIconPath="src/org/protope/designer/webbuk/model/icons/components.gif"
+            drawerLabel="Web Components"
+            id="org.protope.designer.palette.Web"
+            name="Web Palette">
+         <tool
+               description="Creates a Horizontal Line"
+               editor="org.protope.designer.webbuk.edit.WHorizontalLineEditPart"
+               id="org.protope.designer.palette.Web.HorizontalLine"
+               label="Horizontal Line"
+               mediumIcon="src/org/protope/designer/webbuk/model/icons/WHorizontalLine24.gif"
+               model="org.protope.designer.webbuk.model.WHorizontalLine"
+               smallIcon="src/org/protope/designer/webbuk/model/icons/WHorizontalLine16.gif">
+         </tool>
+         <tool
+               description="Creates a Vertical Line"
+               editor="org.protope.designer.webbuk.edit.WVerticalLineEditPart"
+               id="org.protope.designer.palette.Web.VerticalLine"
+               label="Vertical Line"
+               mediumIcon="src/org/protope/designer/webbuk/model/icons/WVerticalLine24.gif"
+               model="org.protope.designer.webbuk.model.WVerticalLine"
+               smallIcon="src/org/protope/designer/webbuk/model/icons/WVerticalLine16.gif">
+         </tool>
+         <tool
+               description="Creates a Note"
+               editor="org.protope.designer.webbuk.edit.WNoteEditPart"
+               id="org.protope.designer.palette.Web.Note"
+               label="Note"
+               mediumIcon="src/org/protope/designer/webbuk/model/icons/WVerticalLine24.gif"
+               model="org.protope.designer.webbuk.model.WNote"
+               smallIcon="src/org/protope/designer/webbuk/model/icons/WVerticalLine16.gif">
+         </tool>
+         <tool
+               description="Creates an Image"
+               editor="org.protope.designer.webbuk.edit.WImageEditPart"
+               id="org.protope.designer.palette.Web.Image"
+               label="Image"
+               mediumIcon="src/org/protope/designer/webbuk/model/icons/WImage24.gif"
+               model="org.protope.designer.webbuk.model.WImage"
+               smallIcon="src/org/protope/designer/webbuk/model/icons/WImage16.gif">
+         </tool>
+         <tool
+               description="Creates a Text Editor"
+               editor="org.protope.designer.webbuk.edit.WTextEditEditPart"
+               id="org.protope.designer.palette.Web.TextEdit"
+               label="Text Editor"
+               mediumIcon="src/org/protope/designer/webbuk/model/icons/WTextEdit24.gif"
+               model="org.protope.designer.webbuk.model.WTextEdit"
+               smallIcon="src/org/protope/designer/webbuk/model/icons/WTextEdit16.gif">
+         </tool>
+         <tool
+               description="Creates a Label"
+               editor="org.protope.designer.webbuk.edit.WLabelEditPart"
+               id="org.protope.designer.palette.Web.Label"
+               label="Label"
+               mediumIcon="src/org/protope/designer/webbuk/model/icons/WLabel24.gif"
+               model="org.protope.designer.webbuk.model.WLabel"
+               smallIcon="src/org/protope/designer/webbuk/model/icons/WLabel16.gif">
+         </tool>
+         <tool
+               description="Creates a Button"
+               editor="org.protope.designer.webbuk.edit.WButtonEditPart"
+               id="org.protope.designer.palette.Web.Button"
+               label="Button"
+               mediumIcon="src/org/protope/designer/webbuk/model/icons/WButton24.gif"
+               model="org.protope.designer.webbuk.model.WButton"
+               smallIcon="src/org/protope/designer/webbuk/model/icons/WButton16.gif">
+         </tool>
+      </palette>
    </extension>
 
 </plugin>

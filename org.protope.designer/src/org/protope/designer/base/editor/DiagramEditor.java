@@ -104,17 +104,20 @@ import org.protope.designer.base.actions.DiagramPasteTemplateAction;
 import org.protope.designer.base.dnd.TextTransferDropTargetListener;
 import org.protope.designer.base.edit.BaseGraphicalPartFactory;
 import org.protope.designer.base.edit.BaseTreePartFactory;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIRuler;
 import org.protope.designer.base.palette.UIPaletteCustomizer;
 import org.protope.designer.base.rulers.UIRulerProvider;
-import org.protope.designer.buk.BukHandler;
+import org.protope.designer.extension.DiagramDefinition;
+import org.protope.designer.extension.DiagramRegistry;
 import org.protope.designer.i18n.ProtopeMessages;
 import org.protope.designer.plugin.ProtopeDesignerPlugin;
 import org.protope.designer.plugin.UIContextMenuProvider;
-import org.protope.designer.webbuk.WebBukBag;
+import org.protope.designer.tool.ToolHandler;
 
 public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
+
+	public static final String DIAGRAM_ID = "org.protope.designer.diagram.UI";
 
 	private PaletteRoot root;
 
@@ -122,7 +125,7 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 
 	private OutlinePage outlinePage;
 
-	private UIDiagram diagram;
+	private BaseDiagram diagram;
 
 	private KeyHandler sharedKeyHandler;
 
@@ -172,11 +175,11 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		setEditDomain(new DefaultEditDomain(this));
 	}
 
-	protected UIDiagram getDiagram() {
+	protected BaseDiagram getDiagram() {
 		return diagram;
 	}
 
-	protected void setDiagram(UIDiagram diagram) {
+	protected void setDiagram(BaseDiagram diagram) {
 		this.diagram = diagram;
 	}
 
@@ -197,12 +200,18 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 	@Override
 	protected PaletteRoot getPaletteRoot() {
 		if (root == null) {
-			BukHandler handler = new BukHandler();
-			WebBukBag bag = WebBukBag.getInstance();
-			root = handler.createPalette(bag);
+			ToolHandler handler = new ToolHandler();
+			DiagramDefinition def = getDiagramDefinition();
+			root = handler.createPalette(def);
 		}
 		return root;
 	}
+
+	public DiagramDefinition getDiagramDefinition() {
+		// TODO define this in plugin.
+		return DiagramRegistry.getINSTANCE().getDiagram(DIAGRAM_ID);
+	}
+
 
 	@Override
 	public void doSave(final IProgressMonitor monitor) {
@@ -294,7 +303,7 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		try {
 			InputStream is = file.getContents(false);
 			ObjectInputStream ois = new ObjectInputStream(is);
-			setDiagram((UIDiagram) ois.readObject());
+			setDiagram((BaseDiagram) ois.readObject());
 			ois.close();
 		} catch (Exception e) {
 			// This is just an example. All exceptions caught here.

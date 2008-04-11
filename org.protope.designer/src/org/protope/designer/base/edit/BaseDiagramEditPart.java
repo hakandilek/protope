@@ -41,7 +41,7 @@ import org.eclipse.gef.tools.DeselectAllTracker;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.AccessibleEvent;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.i18n.ProtopeMessages;
 
 /**
@@ -49,13 +49,13 @@ import org.protope.designer.i18n.ProtopeMessages;
  * LogicEditorPart, to hold the entire model. It is sort of a blank board where
  * all other EditParts get added.
  */
-public class UIDiagramEditPart extends BaseContainerEditPart implements
+public class BaseDiagramEditPart extends BaseContainerEditPart implements
 		LayerConstants {
 
 	protected AccessibleEditPart createAccessible() {
 		return new AccessibleGraphicalEditPart() {
 			public void getName(AccessibleEvent e) {
-				e.result = ProtopeMessages.UIDiagram_LabelText;
+				e.result = ProtopeMessages.BaseDiagram_LabelText;
 			}
 		};
 	}
@@ -129,7 +129,7 @@ public class UIDiagramEditPart extends BaseContainerEditPart implements
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
-		if (UIDiagram.ID_ROUTER.equals(evt.getPropertyName()))
+		if (BaseDiagram.ID_ROUTER.equals(evt.getPropertyName()))
 			refreshVisuals();
 		else
 			super.propertyChange(evt);
