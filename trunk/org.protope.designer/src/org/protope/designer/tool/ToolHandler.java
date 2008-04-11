@@ -1,6 +1,7 @@
-package org.protope.designer.buk;
+package org.protope.designer.tool;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.gef.EditPart;
@@ -14,24 +15,31 @@ import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.palette.PaletteStack;
 import org.eclipse.gef.palette.PanningSelectionToolEntry;
 import org.eclipse.gef.palette.ToolEntry;
-import org.eclipse.gef.requests.SimpleFactory;
 import org.eclipse.gef.tools.MarqueeSelectionTool;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.protope.designer.base.model.UIElement;
+import org.protope.designer.extension.DiagramDefinition;
+import org.protope.designer.extension.PaletteDefinition;
+import org.protope.designer.extension.PaletteRegistry;
+import org.protope.designer.extension.ToolDefinition;
 import org.protope.designer.i18n.ProtopeMessages;
+import org.protope.designer.utils.ImageUtils;
 
-public class BukHandler {
+public class ToolHandler {
 
-	public PaletteRoot createPalette(BukBag bag) {
+	public PaletteRoot createPalette(DiagramDefinition diagram) {
 		PaletteRoot logicPalette = new PaletteRoot();
-		logicPalette.addAll(createCategories(bag, logicPalette));
+		logicPalette.addAll(createCategories(diagram, logicPalette));
 		return logicPalette;
 	}
 
-	private List<PaletteContainer> createCategories(BukBag bag, PaletteRoot root) {
+	private List<PaletteContainer> createCategories(DiagramDefinition diagram,
+			PaletteRoot root) {
 		List<PaletteContainer> categories = new ArrayList<PaletteContainer>();
 		categories.add(createControlGroup(root));
-		categories.add(createComponentsDrawer(bag));
+		List<PaletteDefinition> palettes = diagram.getPalettes();
+		for (PaletteDefinition palette : palettes) {
+			categories.add(createComponentsDrawer(palette));
+		}
 		return categories;
 	}
 
@@ -65,31 +73,32 @@ public class BukHandler {
 		return controlGroup;
 	}
 
-	private PaletteContainer createComponentsDrawer(BukBag bag) {
-
-		PaletteDrawer drawer = new PaletteDrawer(
-				bag.getDrawerLabel(),
-				ImageDescriptor.createFromFile(bag.getClass(), bag.getDrawerIconPath()));
+	private PaletteContainer createComponentsDrawer(PaletteDefinition palette) {
+		String pluginID = palette.getDeclaringPluginID();
+		ImageDescriptor image = ImageUtils.getImageDescriptor(pluginID, palette
+				.getDrawerIconPath());
+		String drawerLabel = palette.getDrawerLabel();
+		PaletteDrawer drawer = new PaletteDrawer(drawerLabel, image);
 
 		List<CombinedTemplateCreationEntry> entries = new ArrayList<CombinedTemplateCreationEntry>();
 
-		List<Buk> items = bag.getAll();
+		List<ToolDefinition> tools = palette.getTools();
 		ImageDescriptor smallIcon = null;
 		ImageDescriptor mediumIcon = null;
 		CombinedTemplateCreationEntry combined = null;
 
-		for (Buk item : items) {
-			Class<? extends UIElement> model = item.getModel();
-			String label = item.getPaletteLabel();
-			String description = item.getPaletteDescription();
-			String smallIconPath = item.getSmallIconPath();
-			String mediumIconPath = item.getMediumIconPath();
+		for (ToolDefinition tool : tools) {
+			String label = tool.getLabel();
+			String description = tool.getDescription();
+			String smallIconPath = tool.getSmallIconPath();
+			String mediumIconPath = tool.getMediumIconPath();
 
-			smallIcon = ImageDescriptor.createFromFile(model, smallIconPath);
-			mediumIcon = ImageDescriptor.createFromFile(model, mediumIconPath);
-			
+			smallIcon = ImageUtils.getImageDescriptor(pluginID, smallIconPath);
+			mediumIcon = ImageUtils
+					.getImageDescriptor(pluginID, mediumIconPath);
+
 			combined = new CombinedTemplateCreationEntry(label, description,
-					new SimpleFactory(model), smallIcon, mediumIcon);
+					new ToolDefinitionFactory(tool), smallIcon, mediumIcon);
 			entries.add(combined);
 		}
 
@@ -97,20 +106,17 @@ public class BukHandler {
 		return drawer;
 	}
 
-	
-	public EditPart getEditorFor(BukBag bag, Object model) {
-		Buk item = bag.getItemFor(model);
-		if (item == null) return null;
-		Class<? extends EditPart> editClass = item.getEdit();
-		EditPart instance = null;
-		try {
-			instance = editClass.newInstance();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+	public EditPart getEditorFor(Object model) {
+		Collection<PaletteDefinition> palettes = PaletteRegistry.getINSTANCE()
+				.getPalettes();
+		EditPart editor = null;
+		for (PaletteDefinition palette : palettes) {
+			ToolDefinition tool = palette.getItemFor(model);
+			if (tool == null)
+				continue;
+			editor = tool.getEditor();
 		}
-		return instance;
+		return editor;
 	}
 
 }

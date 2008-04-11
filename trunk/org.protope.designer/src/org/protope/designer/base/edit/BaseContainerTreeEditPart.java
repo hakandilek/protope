@@ -15,7 +15,7 @@ import java.util.List;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElement;
 
 /**
@@ -51,8 +51,8 @@ public class BaseContainerTreeEditPart extends BaseTreeEditPart {
 	 * 
 	 * @return Model of this.
 	 */
-	protected UIDiagram getDiagram() {
-		return (UIDiagram) getModel();
+	protected BaseDiagram getDiagram() {
+		return (BaseDiagram) getModel();
 	}
 
 	/**

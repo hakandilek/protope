@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.commands.Command;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElement;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.i18n.ProtopeMessages;
@@ -22,7 +22,7 @@ import org.protope.designer.i18n.ProtopeMessages;
 public class OrphanChildCommand extends Command {
 
 	private Point oldLocation;
-	private UIDiagram diagram;
+	private BaseDiagram diagram;
 	private UIElementPart child;
 	private int index;
 
@@ -45,7 +45,7 @@ public class OrphanChildCommand extends Command {
 		this.child = child;
 	}
 
-	public void setParent(UIDiagram parent) {
+	public void setParent(BaseDiagram parent) {
 		diagram = parent;
 	}
 

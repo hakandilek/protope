@@ -11,7 +11,7 @@
 package org.protope.designer.base.model.commands;
 
 import org.eclipse.gef.commands.Command;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.i18n.ProtopeMessages;
 
@@ -19,9 +19,9 @@ public class ReorderPartCommand extends Command {
 
 	private int oldIndex, newIndex;
 	private UIElementPart child;
-	private UIDiagram parent;
+	private BaseDiagram parent;
 
-	public ReorderPartCommand(UIElementPart child, UIDiagram parent, int newIndex) {
+	public ReorderPartCommand(UIElementPart child, BaseDiagram parent, int newIndex) {
 		super(ProtopeMessages.ReorderPartCommand_Label);
 		this.child = child;
 		this.parent = parent;

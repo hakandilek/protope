@@ -42,9 +42,9 @@ public class ProtopeMessages extends NLS {
 	public static String SetLocationCommand_Label_Location;
 	public static String SetLocationCommand_Label_Resize;
 
+	public static String BaseDiagram_LabelText;
 	public static String UIElementEditPolicy_OrphanCommandLabelText;
 	public static String UIContainerEditPolicy_OrphanCommandLabelText;
-	public static String UIDiagram_LabelText;
 	public static String UIXYLayoutEditPolicy_AddCommandLabelText;
 	public static String UIXYLayoutEditPolicy_CreateCommandLabelText;
 

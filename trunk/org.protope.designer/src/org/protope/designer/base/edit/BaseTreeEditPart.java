@@ -20,7 +20,7 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElementPart;
 
 /**
@@ -81,7 +81,7 @@ public class BaseTreeEditPart extends
 	}
 
 	public void propertyChange(PropertyChangeEvent change) {
-		if (change.getPropertyName().equals(UIDiagram.CHILDREN)) {
+		if (change.getPropertyName().equals(BaseDiagram.CHILDREN)) {
 			if (change.getOldValue() instanceof Integer)
 				// new child
 				addChild(createChild(change.getNewValue()), ((Integer) change

@@ -18,7 +18,7 @@ import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editpolicies.ContainerEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.requests.GroupRequest;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.base.model.commands.OrphanChildCommand;
 import org.protope.designer.i18n.ProtopeMessages;
@@ -38,7 +38,7 @@ public class BaseContainerEditPolicy extends ContainerEditPolicy {
 			OrphanChildCommand orphan = new OrphanChildCommand();
 			EditPart part = parts.get(i);
 			orphan.setChild((UIElementPart) part.getModel());
-			orphan.setParent((UIDiagram) getHost().getModel());
+			orphan.setParent((BaseDiagram) getHost().getModel());
 			orphan
 					.setLabel(ProtopeMessages.UIElementEditPolicy_OrphanCommandLabelText);
 			result.add(orphan);

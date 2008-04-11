@@ -21,7 +21,7 @@ import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.editpolicies.TreeContainerEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.requests.CreateRequest;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.base.model.commands.CreateCommand;
 import org.protope.designer.base.model.commands.ReorderPartCommand;
@@ -39,7 +39,7 @@ public class BaseTreeContainerEditPolicy extends TreeContainerEditPolicy {
 			rect = r;
 		}
 		cmd.setLocation(rect);
-		cmd.setParent((UIDiagram) getHost().getModel());
+		cmd.setParent((BaseDiagram) getHost().getModel());
 		cmd.setChild(child);
 		cmd.setLabel(label);
 		if (index >= 0)
@@ -93,7 +93,7 @@ public class BaseTreeContainerEditPolicy extends TreeContainerEditPolicy {
 				tempIndex--;
 			}
 			command.add(new ReorderPartCommand((UIElementPart) child.getModel(),
-					(UIDiagram) getHost().getModel(), tempIndex));
+					(BaseDiagram) getHost().getModel(), tempIndex));
 		}
 		return command;
 	}

@@ -18,7 +18,7 @@ import java.util.Map;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.commands.Command;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElement;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.base.model.UIGuide;
@@ -29,7 +29,7 @@ import org.protope.designer.webbuk.model.WNote;
 public class CloneCommand extends Command {
 
 	private List<UIElementPart> parts, newTopLevelParts;
-	private UIDiagram parent;
+	private BaseDiagram parent;
 	private Map<UIElementPart, Rectangle> bounds;
 	private Map<UIElementPart, Integer> indices;
 	private ChangeGuideCommand vGuideCommand, hGuideCommand;
@@ -59,7 +59,7 @@ public class CloneCommand extends Command {
 		indices.put(part, new Integer(index));
 	}
 
-	protected void clonePart(UIElementPart oldPart, UIDiagram newParent,
+	protected void clonePart(UIElementPart oldPart, BaseDiagram newParent,
 			Rectangle newBounds, int index) {
 		UIElementPart newPart = null;
 
@@ -77,11 +77,11 @@ public class CloneCommand extends Command {
 					.isSelected()));
 		}
 
-		if (oldPart instanceof UIDiagram) {
-			Iterator<UIElement> i = ((UIDiagram) oldPart).getChildren().iterator();
+		if (oldPart instanceof BaseDiagram) {
+			Iterator<UIElement> i = ((BaseDiagram) oldPart).getChildren().iterator();
 			while (i.hasNext()) {
 				// for children they will not need new bounds
-				clonePart((UIElementPart) i.next(), (UIDiagram) newPart, null, -1);
+				clonePart((UIElementPart) i.next(), (BaseDiagram) newPart, null, -1);
 			}
 		}
 
@@ -127,7 +127,7 @@ public class CloneCommand extends Command {
 
 	}
 
-	public void setParent(UIDiagram parent) {
+	public void setParent(BaseDiagram parent) {
 		this.parent = parent;
 	}
 

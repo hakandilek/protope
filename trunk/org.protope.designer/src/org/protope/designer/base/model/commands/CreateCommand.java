@@ -12,7 +12,7 @@ package org.protope.designer.base.model.commands;
 
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.protope.designer.base.model.UIDiagram;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.i18n.ProtopeMessages;
 
@@ -20,7 +20,7 @@ public class CreateCommand extends org.eclipse.gef.commands.Command {
 
 	private UIElementPart child;
 	private Rectangle rect;
-	private UIDiagram parent;
+	private BaseDiagram parent;
 	private int index = -1;
 
 	public CreateCommand() {
@@ -67,7 +67,7 @@ public class CreateCommand extends org.eclipse.gef.commands.Command {
 		rect = r;
 	}
 
-	public void setParent(UIDiagram newParent) {
+	public void setParent(BaseDiagram newParent) {
 		parent = newParent;
 	}
 
