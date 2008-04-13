@@ -249,14 +249,15 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 
 	protected void loadProperties() {
 		// Ruler properties
-		UIRuler ruler = getDiagram().getRuler(PositionConstants.WEST);
+		BaseDiagram d = getDiagram();
+		UIRuler ruler = d.getRuler(PositionConstants.WEST);
 		RulerProvider provider = null;
 		if (ruler != null) {
 			provider = new UIRulerProvider(ruler);
 		}
 		getGraphicalViewer().setProperty(RulerProvider.PROPERTY_VERTICAL_RULER,
 				provider);
-		ruler = getDiagram().getRuler(PositionConstants.NORTH);
+		ruler = d.getRuler(PositionConstants.NORTH);
 		provider = null;
 		if (ruler != null) {
 			provider = new UIRulerProvider(ruler);
@@ -265,24 +266,24 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 				RulerProvider.PROPERTY_HORIZONTAL_RULER, provider);
 		getGraphicalViewer().setProperty(
 				RulerProvider.PROPERTY_RULER_VISIBILITY,
-				new Boolean(getDiagram().getRulerVisibility()));
+				new Boolean(d.getRulerVisibility()));
 
 		// Snap to Geometry property
 		getGraphicalViewer().setProperty(SnapToGeometry.PROPERTY_SNAP_ENABLED,
-				new Boolean(getDiagram().isSnapToGeometryEnabled()));
+				new Boolean(d.isSnapToGeometryEnabled()));
 
 		// Grid properties
 		getGraphicalViewer().setProperty(SnapToGrid.PROPERTY_GRID_ENABLED,
-				new Boolean(getDiagram().isGridEnabled()));
+				new Boolean(d.isGridEnabled()));
 		// We keep grid visibility and enablement in sync
 		getGraphicalViewer().setProperty(SnapToGrid.PROPERTY_GRID_VISIBLE,
-				new Boolean(getDiagram().isGridEnabled()));
+				new Boolean(d.isGridEnabled()));
 
 		// Zoom
 		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(
 				ZoomManager.class.toString());
 		if (manager != null)
-			manager.setZoom(getDiagram().getZoom());
+			manager.setZoom(d.getZoom());
 		// Scroll-wheel Zoom
 		getGraphicalViewer().setProperty(
 				MouseWheelHandler.KeyGenerator.getKey(SWT.MOD1),

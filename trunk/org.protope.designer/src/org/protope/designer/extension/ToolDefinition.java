@@ -2,6 +2,7 @@ package org.protope.designer.extension;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPart;
 import org.protope.designer.base.model.UIElement;
 
@@ -19,7 +20,8 @@ public class ToolDefinition {
 
 	public String getDescription() {
 		String d = element.getAttribute("description");
-		if (d == null) d = getLabel();
+		if (d == null)
+			d = getLabel();
 		return d;
 	}
 
@@ -32,7 +34,7 @@ public class ToolDefinition {
 	}
 
 	public UIElement getModel() {
-		UIElement model = null; 
+		UIElement model = null;
 		try {
 			model = (UIElement) element.createExecutableExtension("model");
 		} catch (CoreException e) {
@@ -42,13 +44,38 @@ public class ToolDefinition {
 	}
 
 	public EditPart getEditor() {
-		EditPart editor = null; 
+		EditPart editor = null;
 		try {
 			editor = (EditPart) element.createExecutableExtension("editor");
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
 		return editor;
+	}
+
+	public boolean isEastResizable() {
+		// TODO add into extension schema
+		return false;
+	}
+
+	public boolean isWestResizable() {
+		// TODO add into extension schema
+		return false;
+	}
+
+	public boolean isNorthResizable() {
+		// TODO add into extension schema
+		return false;
+	}
+
+	public boolean isSouthResizable() {
+		// TODO add into extension schema
+		return false;
+	}
+
+	public IFigure getFeedBackFigure() {
+		// TODO add into extension schema
+		return null;
 	}
 
 }

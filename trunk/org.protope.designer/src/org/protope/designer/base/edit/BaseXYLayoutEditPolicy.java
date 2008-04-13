@@ -33,9 +33,9 @@ import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.rulers.RulerProvider;
-import org.protope.designer.base.figures.LabelFeedbackFigure;
 import org.protope.designer.base.figures.ProtopeColorConstants;
 import org.protope.designer.base.model.BaseDiagram;
+import org.protope.designer.base.model.UIElement;
 import org.protope.designer.base.model.UIElementPart;
 import org.protope.designer.base.model.UIGuide;
 import org.protope.designer.base.model.commands.AddCommand;
@@ -43,9 +43,9 @@ import org.protope.designer.base.model.commands.ChangeGuideCommand;
 import org.protope.designer.base.model.commands.CloneCommand;
 import org.protope.designer.base.model.commands.CreateCommand;
 import org.protope.designer.base.model.commands.SetConstraintCommand;
+import org.protope.designer.extension.ToolDefinition;
 import org.protope.designer.i18n.ProtopeMessages;
-import org.protope.designer.webbuk.edit.WNoteEditPart;
-import org.protope.designer.webbuk.model.WNote;
+import org.protope.designer.tool.ToolHandler;
 
 public class BaseXYLayoutEditPolicy extends
 		org.eclipse.gef.editpolicies.XYLayoutEditPolicy {
@@ -187,14 +187,25 @@ public class BaseXYLayoutEditPolicy extends
 	}
 
 	protected EditPolicy createChildEditPolicy(EditPart child) {
-		if (child instanceof WNoteEditPart) {
-			ResizableEditPolicy policy = new BaseResizableEditPolicy();
-			policy.setResizeDirections(PositionConstants.EAST
-					| PositionConstants.WEST);
-			return policy;
+		ResizableEditPolicy policy = new BaseResizableEditPolicy();
+
+		ToolHandler handler = new ToolHandler();
+		ToolDefinition tool = handler.getToolFor(child);
+		if (tool != null) {
+			int resize = 0;
+			if (tool.isEastResizable())
+				resize |= PositionConstants.EAST;
+			if (tool.isWestResizable())
+				resize |= PositionConstants.WEST;
+			if (tool.isNorthResizable())
+				resize |= PositionConstants.NORTH;
+			if (tool.isSouthResizable())
+				resize |= PositionConstants.SOUTH;
+			if (resize > 0)
+				policy.setResizeDirections(resize);
 		}
 
-		return new BaseResizableEditPolicy();
+		return policy;
 	}
 
 	/*
@@ -203,11 +214,17 @@ public class BaseXYLayoutEditPolicy extends
 	 * @see org.eclipse.gef.editpolicies.LayoutEditPolicy#createSizeOnDropFeedback(org.eclipse.gef.requests.CreateRequest)
 	 */
 	protected IFigure createSizeOnDropFeedback(CreateRequest createRequest) {
-		IFigure figure;
+		IFigure figure = null;
 
-		if (createRequest.getNewObject() instanceof WNote)
-			figure = new LabelFeedbackFigure();
-		else {
+		Object newObject = createRequest.getNewObject();
+		if (newObject instanceof UIElement) {
+			UIElement modelElement = (UIElement) newObject;
+			ToolHandler handler = new ToolHandler();
+			ToolDefinition tool = handler.getToolFor(modelElement);
+			figure = tool.getFeedBackFigure();
+		}
+		
+		if (figure == null) {
 			figure = new RectangleFigure();
 			((RectangleFigure) figure).setXOR(true);
 			((RectangleFigure) figure).setFill(true);

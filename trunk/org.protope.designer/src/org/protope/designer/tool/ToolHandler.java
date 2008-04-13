@@ -17,6 +17,7 @@ import org.eclipse.gef.palette.PanningSelectionToolEntry;
 import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.gef.tools.MarqueeSelectionTool;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.protope.designer.base.model.UIElement;
 import org.protope.designer.extension.DiagramDefinition;
 import org.protope.designer.extension.PaletteDefinition;
 import org.protope.designer.extension.PaletteRegistry;
@@ -106,7 +107,7 @@ public class ToolHandler {
 		return drawer;
 	}
 
-	public EditPart getEditorFor(Object model) {
+	public EditPart getEditorFor(UIElement model) {
 		Collection<PaletteDefinition> palettes = PaletteRegistry.getINSTANCE()
 				.getPalettes();
 		EditPart editor = null;
@@ -117,6 +118,28 @@ public class ToolHandler {
 			editor = tool.getEditor();
 		}
 		return editor;
+	}
+
+	public ToolDefinition getToolFor(UIElement model) {
+		Collection<PaletteDefinition> palettes = PaletteRegistry.getINSTANCE()
+				.getPalettes();
+		for (PaletteDefinition palette : palettes) {
+			ToolDefinition tool = palette.getItemFor(model);
+			if (tool != null)
+				return tool;
+		}
+		return null;
+	}
+
+	public ToolDefinition getToolFor(EditPart editor) {
+		Collection<PaletteDefinition> palettes = PaletteRegistry.getINSTANCE()
+				.getPalettes();
+		for (PaletteDefinition palette : palettes) {
+			ToolDefinition tool = palette.getItemFor(editor);
+			if (tool != null)
+				return tool;
+		}
+		return null;
 	}
 
 }
