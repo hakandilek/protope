@@ -51,4 +51,14 @@ public class DiagramDefinition {
 		this.palettes.remove(palette);
 	}
 
+	/**
+	 * adds a list of palettes
+	 * 
+	 * @param list
+	 *            the list
+	 */
+	public void addPalettes(List<PaletteDefinition> list) {
+		this.palettes.addAll(list);
+	}
+
 }

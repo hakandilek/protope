@@ -2,6 +2,7 @@ package org.protope.designer.extension;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DiagramRegistry {
@@ -39,8 +40,16 @@ public class DiagramRegistry {
 	 *            the diagram to add
 	 */
 	public void addDiagram(DiagramDefinition diagram) {
-		if (diagram != null)
-			this.diagrams.put(diagram.getDiagramID(), diagram);
+		if (diagram != null) {
+			String diagramID = diagram.getDiagramID();
+			if (diagrams.containsKey(diagramID)) {
+				DiagramDefinition d = diagrams.get(diagramID);
+				List<PaletteDefinition> palettes = diagram.getPalettes();
+				d.addPalettes(palettes);
+			} else {
+				this.diagrams.put(diagramID, diagram);
+			}
+		}
 	}
 
 	/**
