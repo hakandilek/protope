@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.protope.designer.diagram">
+      <diagram
+            id="org.protope.designer.web.diagram1"
+            name="org.protope.designer.web.diagram1">
+      </diagram>
+   </extension>
+
+   <extension
+         point="org.protope.designer.palette">
+      <palette
+            drawerIconPath="src/org/protope/designer/web/model/icons/components.gif"
+            drawerLabel="Web Components"
+            id="org.protope.designer.palette.Web"
+            name="Web Palette">
+         <tool
+               description="Creates a Horizontal Line"
+               editor="org.protope.designer.web.edit.WHorizontalLineEditPart"
+               id="org.protope.designer.palette.Web.HorizontalLine"
+               label="Horizontal Line"
+               mediumIcon="src/org/protope/designer/web/model/icons/WHorizontalLine24.gif"
+               model="org.protope.designer.web.model.WHorizontalLine"
+               smallIcon="src/org/protope/designer/web/model/icons/WHorizontalLine16.gif">
+         </tool>
+         <tool
+               description="Creates a Vertical Line"
+               editor="org.protope.designer.web.edit.WVerticalLineEditPart"
+               id="org.protope.designer.palette.Web.VerticalLine"
+               label="Vertical Line"
+               mediumIcon="src/org/protope/designer/web/model/icons/WVerticalLine24.gif"
+               model="org.protope.designer.web.model.WVerticalLine"
+               smallIcon="src/org/protope/designer/web/model/icons/WVerticalLine16.gif">
+         </tool>
+         <tool
+               description="Creates a Note"
+               editor="org.protope.designer.web.edit.WNoteEditPart"
+               id="org.protope.designer.palette.Web.Note"
+               label="Note"
+               mediumIcon="src/org/protope/designer/web/model/icons/WVerticalLine24.gif"
+               model="org.protope.designer.web.model.WNote"
+               smallIcon="src/org/protope/designer/web/model/icons/WVerticalLine16.gif">
+         </tool>
+         <tool
+               description="Creates an Image"
+               editor="org.protope.designer.web.edit.WImageEditPart"
+               id="org.protope.designer.palette.Web.Image"
+               label="Image"
+               mediumIcon="src/org/protope/designer/web/model/icons/WImage24.gif"
+               model="org.protope.designer.web.model.WImage"
+               smallIcon="src/org/protope/designer/web/model/icons/WImage16.gif">
+         </tool>
+         <tool
+               description="Creates a Text Editor"
+               editor="org.protope.designer.web.edit.WTextEditEditPart"
+               id="org.protope.designer.palette.Web.TextEdit"
+               label="Text Editor"
+               mediumIcon="src/org/protope/designer/web/model/icons/WTextEdit24.gif"
+               model="org.protope.designer.web.model.WTextEdit"
+               smallIcon="src/org/protope/designer/web/model/icons/WTextEdit16.gif">
+         </tool>
+         <tool
+               description="Creates a Label"
+               editor="org.protope.designer.web.edit.WLabelEditPart"
+               id="org.protope.designer.palette.Web.Label"
+               label="Label"
+               mediumIcon="src/org/protope/designer/web/model/icons/WLabel24.gif"
+               model="org.protope.designer.web.model.WLabel"
+               smallIcon="src/org/protope/designer/web/model/icons/WLabel16.gif">
+         </tool>
+         <tool
+               description="Creates a Button"
+               editor="org.protope.designer.web.edit.WButtonEditPart"
+               id="org.protope.designer.palette.Web.Button"
+               label="Button"
+               mediumIcon="src/org/protope/designer/web/model/icons/WButton24.gif"
+               model="org.protope.designer.web.model.WButton"
+               smallIcon="src/org/protope/designer/web/model/icons/WButton16.gif">
+         </tool>
+      </palette>
+   </extension>
+
+
+</plugin>
