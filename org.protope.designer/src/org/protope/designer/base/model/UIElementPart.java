@@ -22,7 +22,7 @@ import org.protope.designer.i18n.ProtopeMessages;
 import org.protope.designer.utils.DimensionPropertySource;
 import org.protope.designer.utils.LocationPropertySource;
 
-abstract public class UIElementPart extends UIElement {
+abstract public class UIElementPart extends UIElement implements Cloneable {
 
 	private String id;
 	private UIGuide verticalGuide, horizontalGuide;
@@ -172,4 +172,5 @@ abstract public class UIElementPart extends UIElement {
 		verticalGuide = vGuide;
 	}
 
+	public abstract Object clone();
 }

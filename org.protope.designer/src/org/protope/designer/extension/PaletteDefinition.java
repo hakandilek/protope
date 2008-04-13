@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
+import org.eclipse.gef.EditPart;
 import org.protope.designer.base.model.UIElement;
 
 public class PaletteDefinition {
@@ -62,11 +63,11 @@ public class PaletteDefinition {
 		return element.getAttribute("drawerLabel");
 	}
 
-	public ToolDefinition getItemFor(Object model) {
-		//TODO:use a cache
+	public ToolDefinition getItemFor(UIElement model) {
+		// TODO:use a cache
 		if (model == null)
 			return null;
-		Class<?> class1 = model.getClass();
+		Class<? extends UIElement> class1 = model.getClass();
 		for (ToolDefinition tool : tools) {
 			UIElement toolModel = tool.getModel();
 			if (class1.equals(toolModel.getClass())) {
@@ -79,6 +80,20 @@ public class PaletteDefinition {
 	public String getDeclaringPluginID() {
 		IExtension extension = element.getDeclaringExtension();
 		return extension.getNamespaceIdentifier();
+	}
+
+	public ToolDefinition getItemFor(EditPart editor) {
+		// TODO:use a cache
+		if (editor == null)
+			return null;
+		Class<? extends EditPart> class1 = editor.getClass();
+		for (ToolDefinition tool : tools) {
+			EditPart toolEditor = tool.getEditor();
+			if (class1.equals(toolEditor.getClass())) {
+				return tool;
+			}
+		}
+		return null;
 	}
 
 }

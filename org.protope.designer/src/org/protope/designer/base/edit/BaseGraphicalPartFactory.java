@@ -13,13 +13,14 @@ package org.protope.designer.base.edit;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
 import org.protope.designer.base.model.BaseDiagram;
+import org.protope.designer.base.model.UIElement;
 import org.protope.designer.tool.ToolHandler;
 
 public class BaseGraphicalPartFactory implements EditPartFactory {
 
 	public EditPart createEditPart(EditPart context, Object model) {
 		ToolHandler handler = new ToolHandler();
-		EditPart child = handler.getEditorFor(model);
+		EditPart child = handler.getEditorFor((UIElement) model);
 
 		if (child == null && model instanceof BaseDiagram)
 			child = new BaseDiagramEditPart();

@@ -105,4 +105,9 @@ public class BaseDiagram extends UIElementPart {
 		this.zoom = zoom;
 	}
 
+	@Override
+	public Object clone() {
+		return new BaseDiagram();
+	}
+
 }
