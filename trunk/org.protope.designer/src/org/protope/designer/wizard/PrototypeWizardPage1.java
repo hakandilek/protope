@@ -3,7 +3,6 @@ package org.protope.designer.wizard;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -22,9 +21,11 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.ide.IDE;
+import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.DiagramType;
 import org.protope.designer.base.model.UIDiagram;
 import org.protope.designer.i18n.ProtopeMessages;
+import org.protope.designer.utils.LoadSaveUtils;
 
 public class PrototypeWizardPage1 extends WizardNewFileCreationPage implements
 		SelectionListener {
@@ -75,21 +76,21 @@ public class PrototypeWizardPage1 extends WizardNewFileCreationPage implements
 	}
 
 	protected InputStream getInitialContents() {
-		UIDiagram diagram = new UIDiagram();
+		BaseDiagram diagram = createDiagram();
 		ByteArrayInputStream bais = null;
 		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(baos);
-			oos.writeObject(diagram);
-			oos.flush();
-			oos.close();
-			baos.close();
-			bais = new ByteArrayInputStream(baos.toByteArray());
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			LoadSaveUtils.writeToOutputStream(diagram, os);
+			bais = new ByteArrayInputStream(os.toByteArray());
 			bais.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return bais;
+	}
+
+	protected BaseDiagram createDiagram() {
+		return new UIDiagram();
 	}
 
 	/**

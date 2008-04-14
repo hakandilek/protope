@@ -12,8 +12,6 @@ package org.protope.designer.base.model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
@@ -22,32 +20,42 @@ import org.eclipse.ui.views.properties.IPropertySource;
 abstract public class UIElement implements IPropertySource, Cloneable,
 		Serializable {
 
-	public static final String CHILDREN = "Children", //$NON-NLS-1$
-			INPUTS = "inputs", //$NON-NLS-1$
-			OUTPUTS = "outputs"; //$NON-NLS-1$
+	public static final String CHILDREN = "Children"; //$NON-NLS-1$
 
-	transient protected PropertyChangeSupport listeners = new PropertyChangeSupport(
-			this);
+	transient protected PropertyChangeSupport listeners;
+	
 	static final long serialVersionUID = 1;
 
+	
+	public UIElement() {
+		super();
+	}
+
+	private PropertyChangeSupport getListeners() {
+		if (listeners == null) {
+			listeners = new PropertyChangeSupport(this);
+		}
+		return listeners;
+	}
+
 	public void addPropertyChangeListener(PropertyChangeListener l) {
-		listeners.addPropertyChangeListener(l);
+		getListeners().addPropertyChangeListener(l);
 	}
 
 	protected void firePropertyChange(String prop, Object old, Object newValue) {
-		listeners.firePropertyChange(prop, old, newValue);
+		getListeners().firePropertyChange(prop, old, newValue);
 	}
 
 	protected void fireChildAdded(String prop, Object child, Object index) {
-		listeners.firePropertyChange(prop, index, child);
+		getListeners().firePropertyChange(prop, index, child);
 	}
 
 	protected void fireChildRemoved(String prop, Object child) {
-		listeners.firePropertyChange(prop, child, null);
+		getListeners().firePropertyChange(prop, child, null);
 	}
 
 	protected void fireStructureChange(String prop, Object child) {
-		listeners.firePropertyChange(prop, null, child);
+		getListeners().firePropertyChange(prop, null, child);
 	}
 
 	public Object getEditableValue() {
@@ -74,14 +82,8 @@ abstract public class UIElement implements IPropertySource, Cloneable,
 		return true;
 	}
 
-	private void readObject(ObjectInputStream in) throws IOException,
-			ClassNotFoundException {
-		in.defaultReadObject();
-		listeners = new PropertyChangeSupport(this);
-	}
-
 	public void removePropertyChangeListener(PropertyChangeListener l) {
-		listeners.removePropertyChangeListener(l);
+		getListeners().removePropertyChangeListener(l);
 	}
 
 	public void resetPropertyValue(Object propName) {
@@ -99,4 +101,5 @@ abstract public class UIElement implements IPropertySource, Cloneable,
 	public void update() {
 	}
 
+	
 }

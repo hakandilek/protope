@@ -94,11 +94,7 @@ abstract public class BaseEditPart extends
 				// remove child
 				removeChild((EditPart) getViewer().getEditPartRegistry().get(
 						evt.getOldValue()));
-		} else if (UIElementPart.INPUTS.equals(prop))
-			refreshTargetConnections();
-		else if (UIElementPart.OUTPUTS.equals(prop))
-			refreshSourceConnections();
-		else if (prop.equals(UIElementPart.ID_SIZE)
+		} else if (prop.equals(UIElementPart.ID_SIZE)
 				|| prop.equals(UIElementPart.ID_LOCATION))
 			refreshVisuals();
 	}
