@@ -27,7 +27,7 @@
             icon="protope.gif"
             category="org.protope.category"
             class="org.protope.designer.wizard.PrototypeCreationWizard"
-            id="org.protope.designer.wizard.new.prototype">
+            id="org.protope.designer.wizard.new.diagram">
          <description>
             %Protope_wizard_description
          </description>
@@ -72,5 +72,26 @@
                paletteID="org.protope.designer.palette.Web">
          </paletteAssociation>
       </diagram>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:new?after=additions">
+         <command
+               commandId="org.protope.designer.commands.newDiagram"
+               icon="protope.gif"
+               id="org.protope.designer.commands.newDiagram"
+               label="%org.protope.designer.commands.newDiagram.label"
+               tooltip="%org.protope.designer.commands.newDiagram.tooltip">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.protope.designer.handler.NewDiagramHandler"
+            id="org.protope.designer.commands.newDiagram"
+            name="%org.protope.designer.commands.newDiagram">
+      </command>
    </extension>
 </plugin>
