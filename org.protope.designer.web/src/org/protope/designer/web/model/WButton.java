@@ -1,7 +1,5 @@
 package org.protope.designer.web.model;
 
-import java.io.IOException;
-
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.swt.graphics.Image;
 import org.protope.designer.base.model.UIElementPart;
@@ -35,11 +33,6 @@ public class WButton extends UIElementPart {
 
 	public Dimension getSize() {
 		return new Dimension(size.width, size.height);
-	}
-
-	private void readObject(java.io.ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
-		s.defaultReadObject();
 	}
 
 	public void setSize(Dimension d) {

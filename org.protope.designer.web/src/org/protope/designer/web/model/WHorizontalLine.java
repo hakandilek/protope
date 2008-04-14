@@ -1,7 +1,5 @@
 package org.protope.designer.web.model;
 
-import java.io.IOException;
-
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.swt.graphics.Image;
 import org.protope.designer.base.model.UIElementPart;
@@ -36,11 +34,6 @@ public class WHorizontalLine extends UIElementPart {
 
 	protected String getNewID() {
 		return Integer.toString(count++);
-	}
-
-	private void readObject(java.io.ObjectInputStream s) throws IOException,
-			ClassNotFoundException {
-		s.defaultReadObject();
 	}
 
 	public String toString() {
