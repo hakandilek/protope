@@ -2,10 +2,6 @@ package org.protope.designer.base.editor;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.EventObject;
@@ -33,6 +29,7 @@ import org.eclipse.draw2d.parts.Thumbnail;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.KeyHandler;
 import org.eclipse.gef.KeyStroke;
 import org.eclipse.gef.LayerConstants;
@@ -114,6 +111,7 @@ import org.protope.designer.i18n.ProtopeMessages;
 import org.protope.designer.plugin.ProtopeDesignerPlugin;
 import org.protope.designer.plugin.UIContextMenuProvider;
 import org.protope.designer.tool.ToolHandler;
+import org.protope.designer.utils.LoadSaveUtils;
 
 public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 
@@ -219,32 +217,42 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		SafeRunner.run(new SafeRunnable() {
 			public void run() throws Exception {
 				saveProperties();
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				writeToOutputStream(out);
 				IFile file = ((IFileEditorInput) getEditorInput()).getFile();
-				file.setContents(new ByteArrayInputStream(out.toByteArray()),
-						true, false, monitor);
+				writeToFile(file, monitor);
 				getCommandStack().markSaveLocation();
 			}
+
 		});
 		editorSaving = false;
 	}
 
+	protected void writeToFile(IFile file, IProgressMonitor monitor) throws Exception {
+		LoadSaveUtils.writeToFile(getDiagram(), file, monitor);
+	}
+
+	protected void writeToOutputStream(OutputStream os) throws Exception {
+		LoadSaveUtils.writeToOutputStream(getDiagram(), os);
+	}
+
+	protected BaseDiagram readFromFile(IFile file) throws Exception {
+		return LoadSaveUtils.readFromFile(file);
+	}
+
 	protected void saveProperties() {
-		getDiagram().setRulerVisibility(
-				((Boolean) getGraphicalViewer().getProperty(
-						RulerProvider.PROPERTY_RULER_VISIBILITY))
-						.booleanValue());
-		getDiagram().setGridEnabled(
-				((Boolean) getGraphicalViewer().getProperty(
-						SnapToGrid.PROPERTY_GRID_ENABLED)).booleanValue());
-		getDiagram().setSnapToGeometry(
-				((Boolean) getGraphicalViewer().getProperty(
-						SnapToGeometry.PROPERTY_SNAP_ENABLED)).booleanValue());
-		ZoomManager manager = (ZoomManager) getGraphicalViewer().getProperty(
-				ZoomManager.class.toString());
+		BaseDiagram d = getDiagram();
+		GraphicalViewer gv = getGraphicalViewer();
+		d.setRulerVisibility(((Boolean) gv
+				.getProperty(RulerProvider.PROPERTY_RULER_VISIBILITY))
+				.booleanValue());
+		d.setGridEnabled(((Boolean) gv
+				.getProperty(SnapToGrid.PROPERTY_GRID_ENABLED)).booleanValue());
+		d.setSnapToGeometry(((Boolean) gv
+				.getProperty(SnapToGeometry.PROPERTY_SNAP_ENABLED))
+				.booleanValue());
+		ZoomManager manager = (ZoomManager) gv.getProperty(ZoomManager.class
+				.toString());
 		if (manager != null)
-			getDiagram().setZoom(manager.getZoom());
+			d.setZoom(manager.getZoom());
 	}
 
 	protected void loadProperties() {
@@ -291,21 +299,13 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 
 	}
 
-	protected void writeToOutputStream(OutputStream os) throws IOException {
-		ObjectOutputStream out = new ObjectOutputStream(os);
-		out.writeObject(getDiagram());
-		out.close();
-	}
-
 	protected void setInput(IEditorInput input) {
 		superSetInput(input);
 
 		IFile file = ((IFileEditorInput) input).getFile();
 		try {
-			InputStream is = file.getContents(false);
-			ObjectInputStream ois = new ObjectInputStream(is);
-			setDiagram((BaseDiagram) ois.readObject());
-			ois.close();
+			BaseDiagram d = readFromFile(file);
+			setDiagram(d);
 		} catch (Exception e) {
 			// This is just an example. All exceptions caught here.
 			e.printStackTrace();

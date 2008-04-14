@@ -11,7 +11,7 @@ public class BaseDiagram extends UIElementPart {
 	/**
 	 * serial id
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7617024213271434440L;
 
 	private static Image UI_ICON = createImage(BaseDiagram.class,
 			"icons/ui16.gif"); //$NON-NLS-1$
@@ -48,6 +48,13 @@ public class BaseDiagram extends UIElementPart {
 
 	public List<UIElement> getChildren() {
 		return children;
+	}
+
+	/**
+	 * @param children the children to set
+	 */
+	public void setChildren(List<UIElement> children) {
+		this.children = children;
 	}
 
 	@Override
