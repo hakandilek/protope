@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.protope.designer;singleton:=true
-Bundle-Version: 0.1.0.20080407_alpha1
+Bundle-Version: 0.1.0.20080414_alpha2
 Bundle-Activator: org.protope.designer.plugin.ProtopeDesignerPlugin
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
@@ -59,4 +59,6 @@ Export-Package: org.protope.designer.base.actions;
  org.protope.designer.base.model.commands;uses:="org.eclipse.gef.commands,org.eclipse.draw2d.geometry,org.protope.designer.base.model",
  org.protope.designer.base.palette;uses:="org.eclipse.gef.ui.palette.customize,org.eclipse.gef.palette,org.eclipse.gef.ui.palette",
  org.protope.designer.base.rulers;uses:="org.eclipse.gef.commands,org.eclipse.gef.rulers,org.protope.designer.base.model",
+ org.protope.designer.plugin,
+ org.protope.designer.tool,
  org.protope.designer.utils

@@ -57,7 +57,9 @@ import org.eclipse.gef.ui.actions.ToggleSnapToGeometryAction;
 import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.palette.PaletteViewer;
+import org.eclipse.gef.ui.palette.PaletteViewerPreferences;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
+import org.eclipse.gef.ui.palette.FlyoutPaletteComposite.FlyoutPreferences;
 import org.eclipse.gef.ui.parts.ContentOutlinePage;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
@@ -103,7 +105,9 @@ import org.protope.designer.base.edit.BaseGraphicalPartFactory;
 import org.protope.designer.base.edit.BaseTreePartFactory;
 import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.base.model.UIRuler;
-import org.protope.designer.base.palette.UIPaletteCustomizer;
+import org.protope.designer.base.palette.DiagramFlyoutPreferences;
+import org.protope.designer.base.palette.DiagramPaletteCustomizer;
+import org.protope.designer.base.palette.DiagramPaletteViewerPreferences;
 import org.protope.designer.base.rulers.UIRulerProvider;
 import org.protope.designer.extension.DiagramDefinition;
 import org.protope.designer.extension.DiagramRegistry;
@@ -169,6 +173,8 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		}
 	};
 
+	private FlyoutPreferences palettePreferences = new DiagramFlyoutPreferences();
+
 	public DiagramEditor() {
 		setEditDomain(new DefaultEditDomain(this));
 	}
@@ -210,7 +216,6 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		return DiagramRegistry.getINSTANCE().getDiagram(DIAGRAM_ID);
 	}
 
-
 	@Override
 	public void doSave(final IProgressMonitor monitor) {
 		editorSaving = true;
@@ -226,7 +231,8 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		editorSaving = false;
 	}
 
-	protected void writeToFile(IFile file, IProgressMonitor monitor) throws Exception {
+	protected void writeToFile(IFile file, IProgressMonitor monitor)
+			throws Exception {
 		LoadSaveUtils.writeToFile(getDiagram(), file, monitor);
 	}
 
@@ -382,8 +388,19 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		getGraphicalControl().addListener(SWT.Deactivate, listener);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette#getPalettePreferences()
+	 */
+	@Override
+	protected FlyoutPreferences getPalettePreferences() {
+		return palettePreferences;
+	}
+
 	protected CustomPalettePage createPalettePage() {
-		return new CustomPalettePage(getPaletteViewerProvider()) {
+		CustomPalettePage customPalettePage = new CustomPalettePage(
+				getPaletteViewerProvider()) {
 			public void init(IPageSite pageSite) {
 				super.init(pageSite);
 				IAction copy = getActionRegistry().getAction(
@@ -392,18 +409,22 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 						ActionFactory.COPY.getId(), copy);
 			}
 		};
+		customPalettePage.setFocus();
+		return customPalettePage;
 	}
 
 	protected PaletteViewerProvider createPaletteViewerProvider() {
 		return new PaletteViewerProvider(getEditDomain()) {
 			private IMenuListener menuListener;
+			private PaletteViewerPreferences paletteViewerPreferences = new DiagramPaletteViewerPreferences();
 
-			protected void configurePaletteViewer(PaletteViewer viewer) {
-				super.configurePaletteViewer(viewer);
-				viewer.setCustomizer(new UIPaletteCustomizer());
-				viewer
-						.addDragSourceListener(new TemplateTransferDragSourceListener(
-								viewer));
+			protected void configurePaletteViewer(PaletteViewer v) {
+				super.configurePaletteViewer(v);
+				v.setCustomizer(new DiagramPaletteCustomizer());
+				TemplateTransferDragSourceListener l = new TemplateTransferDragSourceListener(
+						v);
+				v.addDragSourceListener(l);
+				v.setPaletteViewerPreferences(paletteViewerPreferences);
 			}
 
 			protected void hookPaletteViewer(PaletteViewer viewer) {
@@ -621,7 +642,6 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		getSite().getPage().closeEditor(DiagramEditor.this, save);
 	}
 
-
 	class OutlinePage extends ContentOutlinePage implements IAdaptable {
 
 		private PageBook pageBook;
@@ -778,40 +798,49 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		}
 	}
 
-	// This class listens to changes to the file system in the workspace, and 
+	// This class listens to changes to the file system in the workspace, and
 	// makes changes accordingly.
 	// 1) An open, saved file gets deleted -> close the editor
-	// 2) An open file gets renamed or moved -> change the editor's input accordingly	
-	class ResourceTracker
-		implements IResourceChangeListener, IResourceDeltaVisitor
-	{
+	// 2) An open file gets renamed or moved -> change the editor's input
+	// accordingly
+	class ResourceTracker implements IResourceChangeListener,
+			IResourceDeltaVisitor {
 		public void resourceChanged(IResourceChangeEvent event) {
 			IResourceDelta delta = event.getDelta();
 			try {
 				if (delta != null)
 					delta.accept(this);
-			} 
-			catch (CoreException exception) {
+			} catch (CoreException exception) {
 				// What should be done here?
 			}
-		}	
-		public boolean visit(IResourceDelta delta) { 
-			if (delta == null || !delta.getResource().equals(((IFileEditorInput)getEditorInput()).getFile()))
+		}
+
+		public boolean visit(IResourceDelta delta) {
+			if (delta == null
+					|| !delta.getResource().equals(
+							((IFileEditorInput) getEditorInput()).getFile()))
 				return true;
-				
+
 			if (delta.getKind() == IResourceDelta.REMOVED) {
 				Display display = getSite().getShell().getDisplay();
-				if ((IResourceDelta.MOVED_TO & delta.getFlags()) == 0) { // if the file was deleted
-					// NOTE: The case where an open, unsaved file is deleted is being handled by the 
-					// PartListener added to the Workbench in the initialize() method.
+				if ((IResourceDelta.MOVED_TO & delta.getFlags()) == 0) { // if
+					// the
+					// file
+					// was
+					// deleted
+					// NOTE: The case where an open, unsaved file is deleted is
+					// being handled by the
+					// PartListener added to the Workbench in the initialize()
+					// method.
 					display.asyncExec(new Runnable() {
 						public void run() {
-							if (!isDirty()) 
-								closeEditor(false); 
+							if (!isDirty())
+								closeEditor(false);
 						}
 					});
 				} else { // else if it was moved or renamed
-					final IFile newFile = ResourcesPlugin.getWorkspace().getRoot().getFile(delta.getMovedToPath());
+					final IFile newFile = ResourcesPlugin.getWorkspace()
+							.getRoot().getFile(delta.getMovedToPath());
 					display.asyncExec(new Runnable() {
 						public void run() {
 							superSetInput(new FileEditorInput(newFile));
@@ -820,10 +849,11 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 				}
 			} else if (delta.getKind() == IResourceDelta.CHANGED) {
 				if (!editorSaving) {
-					// the file was overwritten somehow (could have been replaced by another 
+					// the file was overwritten somehow (could have been
+					// replaced by another
 					// version in the respository)
-					final IFile newFile = ResourcesPlugin.getWorkspace().getRoot()
-							.getFile(delta.getFullPath());
+					final IFile newFile = ResourcesPlugin.getWorkspace()
+							.getRoot().getFile(delta.getFullPath());
 					Display display = getSite().getShell().getDisplay();
 					display.asyncExec(new Runnable() {
 						public void run() {
@@ -833,10 +863,8 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 					});
 				}
 			}
-			return false; 
+			return false;
 		}
 	}
-
-
 
 }

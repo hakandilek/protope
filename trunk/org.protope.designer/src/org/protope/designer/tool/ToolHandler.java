@@ -80,7 +80,7 @@ public class ToolHandler {
 				.getDrawerIconPath());
 		String drawerLabel = palette.getDrawerLabel();
 		PaletteDrawer drawer = new PaletteDrawer(drawerLabel, image);
-
+		drawer.setInitialState(PaletteDrawer.INITIAL_STATE_PINNED_OPEN);
 		List<CombinedTemplateCreationEntry> entries = new ArrayList<CombinedTemplateCreationEntry>();
 
 		List<ToolDefinition> tools = palette.getTools();
