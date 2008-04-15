@@ -4,15 +4,28 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
+import org.protope.designer.i18n.ProtopeMessages;
+import org.protope.designer.plugin.ProtopeDesignerPlugin;
+import org.protope.designer.plugin.ProtopeStatusConstants;
 
 public class PluginUtils {
 
     /** the prefix of OSGi bundle locations */
     public static final String BUNDLE_LOCATION_PREFIX = "initial@reference:";
+	public static final String IDE_WORKBENCH = "org.eclipse.ui.ide";
 
 	/**
      * Checks if the bundle is ready for usage.
@@ -122,5 +135,50 @@ public class PluginUtils {
 		return url;
 		
 	}
+
+	public static Shell getActiveWorkbenchShell() {
+		 IWorkbenchWindow window= getActiveWorkbenchWindow();
+		 if (window != null) {
+		 	return window.getShell();
+		 }
+		 return null;
+	}
+	
+	public static IWorkbenchWindow getActiveWorkbenchWindow() {
+		return getWorkbench().getActiveWorkbenchWindow();
+	}
+	
+    /**
+     * Returns the Platform UI workbench.  
+     * <p> 
+     * This method exists as a convenience for plugin implementors.  The
+     * workbench can also be accessed by invoking <code>PlatformUI.getWorkbench()</code>.
+     * </p>
+     * @return IWorkbench the workbench for this plug-in
+     */
+    public static IWorkbench getWorkbench() {
+        return PlatformUI.getWorkbench();
+    }
+
+	public static void log(Throwable e) {
+		log(new Status(IStatus.ERROR, getPluginId(), ProtopeStatusConstants.INTERNAL_ERROR, ProtopeMessages.Plugin_internal_error, e)); 
+	}
+
+	public static String getPluginId() {
+		return ProtopeDesignerPlugin.PLUGIN_ID;
+	}
+
+	public static void log(IStatus status) {
+		getLog().log(status);
+	}
+
+	protected static ILog getLog() {
+		return ProtopeDesignerPlugin.getDefault().getLog();
+	}
+
+	public static IWorkspace getWorkspace() {
+		return ResourcesPlugin.getWorkspace();
+	}
+	
 
 }

@@ -27,7 +27,7 @@ import org.protope.designer.base.model.UIDiagram;
 import org.protope.designer.i18n.ProtopeMessages;
 import org.protope.designer.utils.LoadSaveUtils;
 
-public class PrototypeWizardPage1 extends WizardNewFileCreationPage implements
+public class NewDiagramWizardPage1 extends WizardNewFileCreationPage implements
 		SelectionListener {
 
 	private final IWorkbench workbench;
@@ -39,7 +39,7 @@ public class PrototypeWizardPage1 extends WizardNewFileCreationPage implements
 
 	private DiagramType modelSelected;
 
-	public PrototypeWizardPage1(IWorkbench workbench,
+	public NewDiagramWizardPage1(IWorkbench workbench,
 			IStructuredSelection selection) {
 		super("prototypePage1", selection); //$NON-NLS-1$
 		this.setTitle(ProtopeMessages.CreatePrototypePage1_Title);
