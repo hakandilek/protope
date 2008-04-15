@@ -24,9 +24,9 @@ public class BaseDiagram extends UIElementPart {
 
 	protected UIRuler leftRuler, topRuler;
 
-	private boolean rulerVisibility = false;
-	private boolean snapToGeometry = false;
-	private boolean gridEnabled = false;
+	private boolean rulerVisibility = true;
+	private boolean snapToGeometry = true;
+	private boolean gridEnabled = true;
 	private double zoom = 1.0;
 
 	public void addChild(UIElementPart child) {
