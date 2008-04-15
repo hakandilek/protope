@@ -14,6 +14,8 @@ package org.protope.designer.plugin;
 public class ProtopeDesignerPlugin extends
 		org.eclipse.ui.plugin.AbstractUIPlugin {
 
+	public static final String PLUGIN_ID = "org.protope.designer";
+	
 	private static ProtopeDesignerPlugin singleton;
 
 	public static ProtopeDesignerPlugin getDefault() {

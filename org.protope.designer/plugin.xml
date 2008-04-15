@@ -23,13 +23,26 @@
             id="org.protope.category">
       </category>
       <wizard
-            name="%Protope_wizard_name"
+            name="%Protope_NewDesignDiagramWizard_name"
             icon="protope.gif"
             category="org.protope.category"
-            class="org.protope.designer.wizard.PrototypeCreationWizard"
+            class="org.protope.designer.wizard.NewDiagramWizard"
             id="org.protope.designer.wizard.new.diagram">
          <description>
-            %Protope_wizard_description
+            %Protope_NewDesignDiagramWizard_description
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+      <wizard
+            category="org.protope.category"
+            class="org.protope.designer.wizard.NewDesignProjectWizard"
+            icon="protope.gif"
+            id="org.protope.designer.wizard.new.project"
+            name="%Protope_NewDesignProjectWizard_name">
+         <description>
+            %Protope_NewDesignProjectWizard_description
          </description>
          <selection
                class="org.eclipse.core.resources.IResource">
@@ -78,6 +91,13 @@
       <menuContribution
             locationURI="menu:new?after=additions">
          <command
+               commandId="org.protope.designer.commands.newProject"
+               icon="protope.gif"
+               id="org.protope.designer.commands.newProject"
+               label="%org.protope.designer.commands.newProject.label"
+               tooltip="%org.protope.designer.commands.newProject.tooltip">
+         </command>
+         <command
                commandId="org.protope.designer.commands.newDiagram"
                icon="protope.gif"
                id="org.protope.designer.commands.newDiagram"
@@ -92,6 +112,11 @@
             defaultHandler="org.protope.designer.handler.NewDiagramHandler"
             id="org.protope.designer.commands.newDiagram"
             name="%org.protope.designer.commands.newDiagram">
+      </command>
+      <command
+            defaultHandler="org.protope.designer.handler.NewProjectHandler"
+            id="org.protope.designer.commands.newProject"
+            name="%org.protope.designer.commands.newProject">
       </command>
    </extension>
 </plugin>

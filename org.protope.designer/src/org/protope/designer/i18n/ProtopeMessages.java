@@ -15,6 +15,15 @@ import org.eclipse.osgi.util.NLS;
 public class ProtopeMessages extends NLS {
 
 	
+	public static String NewDesignProjectWizard_title;
+	public static String NewDesignProjectWizard_description;
+	public static String NewDesignProjectWizard_errorMessage;
+	public static String NewDesignProjectWizard_internalError;
+	public static String NewDesignProjectWizard_caseVariantExistsError;
+	public static String NewDesignProjectWizard_windowTitle;
+	
+	public static String ExceptionDialog_seeErrorLogMessage ;
+	public static String Plugin_internal_error;
 	public static String CreatePrototypePage1_Title;
 	public static String CreatePrototypePage1_Description;
 	public static String CreatePrototypePage1_ModelNames_UIModelName;

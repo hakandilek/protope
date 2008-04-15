@@ -5,14 +5,14 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-public class PrototypeCreationWizard extends Wizard implements INewWizard {
+public class NewDiagramWizard extends Wizard implements INewWizard {
 
 	private IStructuredSelection selection;
 	private IWorkbench workbench;
 
-	private PrototypeWizardPage1 page1;
+	private NewDiagramWizardPage1 page1;
 
-	public PrototypeCreationWizard() {
+	public NewDiagramWizard() {
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class PrototypeCreationWizard extends Wizard implements INewWizard {
 
 	@Override
 	public void addPages() {
-		page1 = new PrototypeWizardPage1(workbench, selection);
+		page1 = new NewDiagramWizardPage1(workbench, selection);
 		addPage(page1);
 	}
 
