@@ -3,7 +3,6 @@
 
 <product name="Protope UI Builder" id="org.protope.designer.Protope" application="org.eclipse.ui.ide.workbench" useFeatures="false">
 
-
    <configIni use="default"/>
 
    <launcherArgs>
@@ -12,14 +11,12 @@
 
    <windowImages/>
 
-
    <launcher>
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
-
 
    <vm>
    </vm>
@@ -80,6 +77,7 @@
       <plugin id="org.eclipse.update.core.win32" fragment="true"/>
       <plugin id="org.eclipse.update.ui"/>
       <plugin id="org.protope.designer"/>
+      <plugin id="org.protope.designer.web"/>
    </plugins>
 
 </product>
