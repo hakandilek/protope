@@ -15,6 +15,8 @@ import org.eclipse.osgi.util.NLS;
 public class ProtopeMessages extends NLS {
 
 	
+	public static String NewDesignProjectWizard_errorTitle ;
+	public static String NewDesignProjectWizard_internalErrorTitle ;
 	public static String NewDesignProjectWizard_title;
 	public static String NewDesignProjectWizard_description;
 	public static String NewDesignProjectWizard_errorMessage;
