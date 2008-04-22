@@ -40,6 +40,9 @@ public class WebPaletteMessages extends NLS {
 	public static String WebPalette_Tool_WLabel_Description;
 	public static String WebPalette_Tool_WLabel_Label;
 	public static String WebPalette_Tool_WLabel;
+	public static String WebPalette_Tool_WLink_Description;
+	public static String WebPalette_Tool_WLink_Label;
+	public static String WebPalette_Tool_WLink;
 
 	public static String UIPlugin_Category_Components_Label;
 	public static String UIPlugin_Category_ControlGroup_Label;
