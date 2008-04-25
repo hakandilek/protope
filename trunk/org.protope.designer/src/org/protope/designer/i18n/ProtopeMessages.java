@@ -15,6 +15,12 @@ import org.eclipse.osgi.util.NLS;
 public class ProtopeMessages extends NLS {
 
 	
+	public static String ImageExporter_PNG;
+	public static String ImageExporter_JPEG;
+	public static String ImageExporter_GIF;
+	public static String ImageExporter_BMP;
+	public static String ImageExporter_TIFF;
+	
 	public static String NewDesignProjectWizard_errorTitle ;
 	public static String NewDesignProjectWizard_internalErrorTitle ;
 	public static String NewDesignProjectWizard_title;

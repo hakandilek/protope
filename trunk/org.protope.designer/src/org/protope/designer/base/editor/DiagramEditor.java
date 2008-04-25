@@ -75,6 +75,7 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jface.util.TransferDropTargetListener;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.events.DisposeEvent;
@@ -175,11 +176,13 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 
 	private FlyoutPreferences palettePreferences = new DiagramFlyoutPreferences();
 
+	private ISelection selection;
+
 	public DiagramEditor() {
 		setEditDomain(new DefaultEditDomain(this));
 	}
 
-	protected BaseDiagram getDiagram() {
+	public BaseDiagram getDiagram() {
 		return diagram;
 	}
 
@@ -396,6 +399,11 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 	@Override
 	protected FlyoutPreferences getPalettePreferences() {
 		return palettePreferences;
+	}
+
+	@Override
+	public GraphicalViewer getGraphicalViewer() {
+		return super.getGraphicalViewer();
 	}
 
 	protected CustomPalettePage createPalettePage() {
@@ -867,4 +875,18 @@ public class DiagramEditor extends GraphicalEditorWithFlyoutPalette {
 		}
 	}
 
+	@Override
+	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		super.selectionChanged(part, selection);
+
+		// If not the active editor, ignore selection changed.
+		if (this.equals(getSite().getPage().getActiveEditor()))
+			this.selection = selection;
+	}
+
+	public ISelection getSelection() {
+		return selection;
+	}
+
+	
 }

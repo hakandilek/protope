@@ -20,6 +20,7 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.RetargetAction;
+import org.protope.designer.base.actions.ExportImageAction;
 import org.protope.designer.i18n.ProtopeMessages;
 
 public class BaseActionBarContributor extends ActionBarContributor {
@@ -57,6 +58,8 @@ public class BaseActionBarContributor extends ActionBarContributor {
 		addRetargetAction(new RetargetAction(
 				GEFActionConstants.TOGGLE_GRID_VISIBILITY,
 				ProtopeMessages.ToggleGrid_Label, IAction.AS_CHECK_BOX));
+
+		addAction(new ExportImageAction());
 	}
 
 	/**
@@ -95,6 +98,9 @@ public class BaseActionBarContributor extends ActionBarContributor {
 		String[] zoomStrings = new String[] { ZoomManager.FIT_ALL,
 				ZoomManager.FIT_HEIGHT, ZoomManager.FIT_WIDTH };
 		tbm.add(new ZoomComboContributionItem(getPage(), zoomStrings));
+
+		tbm.add(new Separator());
+		tbm.add(getAction(ExportImageAction.ID));
 	}
 
 	/**
