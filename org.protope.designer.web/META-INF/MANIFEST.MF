@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.protope.designer.web;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.1.0.20080419_alpha2
 Bundle-Activator: org.protope.designer.web.plugin.Activator
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
