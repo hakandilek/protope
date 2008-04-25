@@ -23,7 +23,7 @@ public class WebPaletteMessages extends NLS {
 	public static String WebPalette_Tool_WNote_Description;
 	public static String WebPalette_Tool_WNote_Label;
 	public static String WebPalette_Tool_WNote;
-	public static String WebPalette_Tool_WNote_Text;
+	public static String WebPalette_Tool_WNote_Property_text;
 	public static String WebPalette_Tool_WImage_Description;
 	public static String WebPalette_Tool_WImage_Label;
 	public static String WebPalette_Tool_WImage;
@@ -37,12 +37,17 @@ public class WebPaletteMessages extends NLS {
 	public static String WebPalette_Tool_WButton_Select_ActionTooltip;
 	public static String WebPalette_Tool_WButton_Unselect_ActionLabel;
 	public static String WebPalette_Tool_WButton_Unselect_ActionTooltip;
+	public static String WebPalette_Tool_WButton_Property_text;
+	public static String WebPalette_Tool_WButton_Property_selected;
 	public static String WebPalette_Tool_WLabel_Description;
 	public static String WebPalette_Tool_WLabel_Label;
 	public static String WebPalette_Tool_WLabel;
+	public static String WebPalette_Tool_WLabel_Property_text;
 	public static String WebPalette_Tool_WLink_Description;
 	public static String WebPalette_Tool_WLink_Label;
 	public static String WebPalette_Tool_WLink;
+	public static String WebPalette_Tool_WLink_Property_text;
+	public static String WebPalette_Tool_WLink_Property_target;
 
 	public static String UIPlugin_Category_Components_Label;
 	public static String UIPlugin_Category_ControlGroup_Label;

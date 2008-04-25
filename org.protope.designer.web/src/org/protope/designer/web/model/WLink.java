@@ -3,6 +3,7 @@ package org.protope.designer.web.model;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.swt.graphics.Image;
 import org.protope.designer.base.model.UIElementPart;
+import org.protope.designer.base.model.property.PropertyHandler;
 import org.protope.designer.web.i18n.WebPaletteMessages;
 
 public class WLink extends UIElementPart {
@@ -34,10 +35,6 @@ public class WLink extends UIElementPart {
 
 	public Dimension getSize() {
 		return new Dimension(size.width, size.height);
-	}
-
-	public void setSize(Dimension d) {
-		super.setSize(d);
 	}
 
 	public String toString() {
@@ -73,6 +70,11 @@ public class WLink extends UIElementPart {
 	@Override
 	public Object clone() {
 		return new WLink();
+	}
+
+	@Override
+	public PropertyHandler getPropertyHandler() {
+		return new WLinkProperties(this);
 	}
 
 	

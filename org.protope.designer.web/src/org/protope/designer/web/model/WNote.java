@@ -3,6 +3,7 @@ package org.protope.designer.web.model;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.swt.graphics.Image;
 import org.protope.designer.base.model.UIElementPart;
+import org.protope.designer.base.model.property.PropertyHandler;
 import org.protope.designer.web.i18n.WebPaletteMessages;
 
 public class WNote extends UIElementPart {
@@ -50,7 +51,7 @@ public class WNote extends UIElementPart {
 	public String toString() {
 		return WebPaletteMessages.WebPalette_Tool_WNote
 				+ " #" + getID() + " " //$NON-NLS-1$ //$NON-NLS-2$
-				+ WebPaletteMessages.WebPalette_Tool_WNote_Text
+				+ WebPaletteMessages.WebPalette_Tool_WNote_Property_text
 				+ "=" + getLabelContents(); //$NON-NLS-1$ 
 	}
 
@@ -59,6 +60,11 @@ public class WNote extends UIElementPart {
 		WNote clone = new WNote();
 		clone.setLabelContents(text);
 		return clone;
+	}
+
+	@Override
+	public PropertyHandler getPropertyHandler() {
+		return new WNoteProperties(this);
 	}
 
 }
