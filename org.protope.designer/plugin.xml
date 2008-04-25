@@ -105,6 +105,31 @@
                tooltip="%org.protope.designer.commands.newDiagram.tooltip">
          </command>
       </menuContribution>
+      <menuContribution
+            locationURI="menu:edit?after=additions">
+         <command
+               commandId="org.protope.designer.commands.exportImage"
+               icon="protope.gif"
+               id="org.protope.designer.commands.exportImage"
+               label="%org.protope.designer.commands.exportImage.label"
+               tooltip="%org.protope.designer.commands.exportImage.tooltip">
+         </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.workbench.file">
+         <command
+               commandId="org.protope.designer.commands.exportImage"
+               icon="protope.gif"
+               id="org.protope.designer.commands.exportImage"
+               label="%org.protope.designer.commands.exportImage.label"
+               tooltip="%org.protope.designer.commands.exportImage.tooltip">
+            <visibleWhen>
+               <instanceof
+                     value="org.protope.designer.base.model.BaseDiagram">
+               </instanceof>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -118,5 +143,31 @@
             id="org.protope.designer.commands.newProject"
             name="%org.protope.designer.commands.newProject">
       </command>
+      <command
+            defaultHandler="org.protope.designer.handler.ExportImageHandler"
+            description="%org.protope.designer.commands.exportImage.tooltip"
+            id="org.protope.designer.commands.exportImage"
+            name="%org.protope.designer.commands.exportImage">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="org.protope.category"
+            name="%Protope_category_name">
+      </category>
+      <wizard
+            category="org.protope.category"
+            class="org.protope.designer.wizard.ExportImageWizard"
+            icon="protope.gif"
+            id="org.protope.designer.wizard.exportImage"
+            name="%Protope_ExportImageWizard_name">
+         <description>
+            %Protope_ExportImageWizard_description
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
    </extension>
 </plugin>
