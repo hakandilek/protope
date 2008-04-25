@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.pde.UpdateSiteNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>wiki</name>
+			<type>2</type>
+			<location>D:/codes/protope/wiki</location>
+		</link>
+	</linkedResources>
 </projectDescription>
