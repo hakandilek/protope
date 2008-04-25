@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package org.protope.designer.utils;
+package org.protope.designer.base.model.property;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
@@ -28,11 +28,11 @@ static{
 	PropertyDescriptor xProp =
 		new TextPropertyDescriptor(ID_XPOS,
 			ProtopeMessages.LocationPropertySource_Property_X_Label);
-	xProp.setValidator(LogicNumberCellEditorValidator.instance());
+	xProp.setValidator(NumberCellEditorValidator.instance());
 	PropertyDescriptor yProp = 
 		new TextPropertyDescriptor(ID_YPOS,
 			ProtopeMessages.LocationPropertySource_Property_Y_Label);
-	yProp.setValidator(LogicNumberCellEditorValidator.instance());
+	yProp.setValidator(NumberCellEditorValidator.instance());
 	descriptors = new IPropertyDescriptor[] {xProp, yProp};
 }
 

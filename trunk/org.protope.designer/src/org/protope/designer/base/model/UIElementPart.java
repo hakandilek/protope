@@ -18,9 +18,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
-import org.protope.designer.i18n.ProtopeMessages;
-import org.protope.designer.utils.DimensionPropertySource;
-import org.protope.designer.utils.LocationPropertySource;
+import org.protope.designer.base.model.property.PropertyHandler;
 
 abstract public class UIElementPart extends UIElement implements Cloneable {
 
@@ -30,18 +28,7 @@ abstract public class UIElementPart extends UIElement implements Cloneable {
 	static final long serialVersionUID = 1;
 	protected Dimension size = new Dimension(-1, -1);
 
-	protected static IPropertyDescriptor[] descriptors = null;
-	public static String ID_SIZE = "size"; //$NON-NLS-1$
 	public static String ID_LOCATION = "location"; //$NON-NLS-1$
-
-	static {
-		descriptors = new IPropertyDescriptor[] {
-				new PropertyDescriptor(ID_SIZE,
-						ProtopeMessages.PropertyDescriptor_UISubPart_Size),
-				new PropertyDescriptor(
-						ID_LOCATION,
-						ProtopeMessages.PropertyDescriptor_UISubPart_Location) };
-	}
 
 	protected static Image createImage(Class<?> rsrcClass, String name) {
 		InputStream stream = rsrcClass.getResourceAsStream(name);
@@ -84,7 +71,10 @@ abstract public class UIElementPart extends UIElement implements Cloneable {
 	 * @return Array of property descriptors.
 	 */
 	public IPropertyDescriptor[] getPropertyDescriptors() {
-		return descriptors;
+		PropertyHandler propertyHandler = getPropertyHandler();
+		if (propertyHandler != null)
+			return propertyHandler.getPropertyDescriptors();
+		return new PropertyDescriptor[0];
 	}
 
 	/**
@@ -96,11 +86,25 @@ abstract public class UIElementPart extends UIElement implements Cloneable {
 	 * @return Object which is the value of the property.
 	 */
 	public Object getPropertyValue(Object propName) {
-		if (ID_SIZE.equals(propName))
-			return new DimensionPropertySource(getSize());
-		else if (ID_LOCATION.equals(propName))
-			return new LocationPropertySource(getLocation());
+		PropertyHandler propertyHandler = getPropertyHandler();
+		if (propertyHandler != null)
+			return propertyHandler.getPropertyValue(propName+"");
 		return null;
+	}
+
+	/**
+	 * Sets the value of a given property with the value supplied. Also fires a
+	 * property change if necessary.
+	 * 
+	 * @param id
+	 *            Name of the parameter to be changed.
+	 * @param value
+	 *            Value to be set to the given parameter.
+	 */
+	public void setPropertyValue(Object id, Object value) {
+		PropertyHandler propertyHandler = getPropertyHandler();
+		if (propertyHandler != null)
+			propertyHandler.setPropertyValue(id+"", value);
 	}
 
 	public Dimension getSize() {
@@ -145,22 +149,6 @@ abstract public class UIElementPart extends UIElement implements Cloneable {
 		firePropertyChange("location", null, p); //$NON-NLS-1$
 	}
 
-	/**
-	 * Sets the value of a given property with the value supplied. Also fires a
-	 * property change if necessary.
-	 * 
-	 * @param id
-	 *            Name of the parameter to be changed.
-	 * @param value
-	 *            Value to be set to the given parameter.
-	 */
-	public void setPropertyValue(Object id, Object value) {
-		if (ID_SIZE.equals(id))
-			setSize((Dimension) value);
-		else if (ID_LOCATION.equals(id))
-			setLocation((Point) value);
-	}
-
 	public void setSize(Dimension d) {
 		if (size.equals(d))
 			return;
@@ -173,4 +161,6 @@ abstract public class UIElementPart extends UIElement implements Cloneable {
 	}
 
 	public abstract Object clone();
+
+	public abstract PropertyHandler getPropertyHandler();
 }

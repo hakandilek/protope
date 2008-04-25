@@ -94,9 +94,9 @@ abstract public class BaseEditPart extends
 				// remove child
 				removeChild((EditPart) getViewer().getEditPartRegistry().get(
 						evt.getOldValue()));
-		} else if (prop.equals(UIElementPart.ID_SIZE)
-				|| prop.equals(UIElementPart.ID_LOCATION))
+		} else {
 			refreshVisuals();
+		}
 	}
 
 	/**

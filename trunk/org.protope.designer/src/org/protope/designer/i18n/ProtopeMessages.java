@@ -43,6 +43,8 @@ public class ProtopeMessages extends NLS {
 	public static String LocationPropertySource_Property_Y_Label;
 
 	public static String CellEditorValidator_NotANumberMessage;
+	public static String CellEditorValidator_NotABooleanMessage;
+	public static String CellEditorValidator_NotAStringMessage;
 
 	public static String PropertyDescriptor_UISubPart_Location;
 	public static String PropertyDescriptor_UISubPart_Size;

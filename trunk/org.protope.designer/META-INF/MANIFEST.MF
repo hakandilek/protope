@@ -57,6 +57,7 @@ Export-Package: org.protope.designer.base.actions;
  org.protope.designer.base.figures;uses:="org.eclipse.swt.graphics,org.eclipse.draw2d",
  org.protope.designer.base.model;uses:="org.eclipse.ui.views.properties,org.eclipse.draw2d.geometry,org.eclipse.swt.graphics",
  org.protope.designer.base.model.commands;uses:="org.eclipse.gef.commands,org.eclipse.draw2d.geometry,org.protope.designer.base.model",
+ org.protope.designer.base.model.property,
  org.protope.designer.base.palette;uses:="org.eclipse.gef.ui.palette.customize,org.eclipse.gef.palette,org.eclipse.gef.ui.palette",
  org.protope.designer.base.rulers;uses:="org.eclipse.gef.commands,org.eclipse.gef.rulers,org.protope.designer.base.model",
  org.protope.designer.plugin,

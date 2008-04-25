@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.protope.designer.base.edit;
 
-import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +40,6 @@ import org.eclipse.gef.tools.DeselectAllTracker;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.AccessibleEvent;
-import org.protope.designer.base.model.BaseDiagram;
 import org.protope.designer.i18n.ProtopeMessages;
 
 /**
@@ -126,13 +124,6 @@ public class BaseDiagramEditPart extends BaseContainerEditPart implements
 				&& ((SelectionRequest) req).getLastButtonPressed() == 3)
 			return new DeselectAllTracker(this);
 		return new MarqueeDragTracker();
-	}
-
-	public void propertyChange(PropertyChangeEvent evt) {
-		if (BaseDiagram.ID_ROUTER.equals(evt.getPropertyName()))
-			refreshVisuals();
-		else
-			super.propertyChange(evt);
 	}
 
 	protected void refreshVisuals() {
