@@ -10,7 +10,7 @@ _Current version under development: *0.1*_
 Basic features
 
 || *Version*        ||  *Release Date* || * Notes * ||
-||  v0.1.0 - alpha3 ||  *    N/A   * || Bug fixes: [http://code.google.com/p/xmdl/issues/detail?id=12 Issue 12] ||
+||  v0.1.0 - alpha3 ||  *    N/A   * || Bug fixes: [http://code.google.com/p/xmdl/issues/detail?id=6 Issue 6], [http://code.google.com/p/xmdl/issues/detail?id=12 Issue 12]  ||
 || *v0.1.0 - alpha2*||  *20.04.2008* || Bug fixes: [http://code.google.com/p/xmdl/issues/detail?id=5 Issue 5], [http://code.google.com/p/xmdl/issues/detail?id=8 Issue 8], [http://code.google.com/p/xmdl/issues/detail?id=9 Issue 9] , [http://code.google.com/p/xmdl/issues/detail?id=10 Issue 10]  ||
 ||  v0.1.0 - alpha1 ||   07.04.2008  || First release ||
 
