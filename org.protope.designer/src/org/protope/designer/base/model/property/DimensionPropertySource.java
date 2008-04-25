@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package org.protope.designer.utils;
+package org.protope.designer.base.model.property;
 
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
@@ -28,11 +28,11 @@ static{
 	PropertyDescriptor widthProp =
 		new TextPropertyDescriptor(ID_WIDTH,
 			ProtopeMessages.DimensionPropertySource_Property_Width_Label);
-	widthProp.setValidator(LogicNumberCellEditorValidator.instance());
+	widthProp.setValidator(NumberCellEditorValidator.instance());
 	PropertyDescriptor heightProp = 
 		new TextPropertyDescriptor(ID_HEIGHT,
 			ProtopeMessages.DimensionPropertySource_Property_Height_Label);
-	heightProp.setValidator(LogicNumberCellEditorValidator.instance());
+	heightProp.setValidator(NumberCellEditorValidator.instance());
 	descriptors = new IPropertyDescriptor[] {widthProp,heightProp};
 }
 

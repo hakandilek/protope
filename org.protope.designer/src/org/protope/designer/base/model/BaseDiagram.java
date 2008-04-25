@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.swt.graphics.Image;
+import org.protope.designer.base.model.property.PropertyHandler;
 
 public class BaseDiagram extends UIElementPart {
 
@@ -15,8 +16,6 @@ public class BaseDiagram extends UIElementPart {
 
 	private static Image UI_ICON = createImage(BaseDiagram.class,
 			"icons/ui16.gif"); //$NON-NLS-1$
-
-	public static String ID_ROUTER = "router";	//$NON-NLS-1$
 
 	private static int count;
 
@@ -116,5 +115,11 @@ public class BaseDiagram extends UIElementPart {
 	public Object clone() {
 		return new BaseDiagram();
 	}
+
+	@Override
+	public PropertyHandler getPropertyHandler() {
+		return new BaseDiagramProperties(this);
+	}
+
 
 }
