@@ -48,6 +48,10 @@ public class WebPaletteMessages extends NLS {
 	public static String WebPalette_Tool_WLink;
 	public static String WebPalette_Tool_WLink_Property_text;
 	public static String WebPalette_Tool_WLink_Property_target;
+	public static String WebPalette_Tool_WCheckbox_Description;
+	public static String WebPalette_Tool_WCheckbox_Label;
+	public static String WebPalette_Tool_WCheckbox;
+	public static String WebPalette_Tool_WCheckbox_Property_text;
 
 	public static String UIPlugin_Category_Components_Label;
 	public static String UIPlugin_Category_ControlGroup_Label;
