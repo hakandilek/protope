@@ -30,6 +30,9 @@ public class WebPaletteMessages extends NLS {
 	public static String WebPalette_Tool_WTextEdit_Description;
 	public static String WebPalette_Tool_WTextEdit_Label;
 	public static String WebPalette_Tool_WTextEdit;
+	public static String WebPalette_Tool_WTextArea_Description;
+	public static String WebPalette_Tool_WTextArea_Label;
+	public static String WebPalette_Tool_WTextArea;
 	public static String WebPalette_Tool_WButton_Description;
 	public static String WebPalette_Tool_WButton_Label;
 	public static String WebPalette_Tool_WButton;
