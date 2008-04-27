@@ -59,6 +59,11 @@ public class WebPaletteMessages extends NLS {
 	public static String WebPalette_Tool_WCombobox_Label;
 	public static String WebPalette_Tool_WCombobox;
 	public static String WebPalette_Tool_WCombobox_Property_text;
+	public static String WebPalette_Tool_WTable_Description;
+	public static String WebPalette_Tool_WTable_Label;
+	public static String WebPalette_Tool_WTable;
+	public static String WebPalette_Tool_WTable_Property_columnCount;
+	public static String WebPalette_Tool_WTable_Property_rowCount;
 
 	public static String UIPlugin_Category_Components_Label;
 	public static String UIPlugin_Category_ControlGroup_Label;
