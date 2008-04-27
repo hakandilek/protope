@@ -97,6 +97,15 @@
                model="org.protope.designer.web.model.WCheckbox"
                smallIcon="src/org/protope/designer/web/model/icons/WCheckbox16.gif">
          </tool>
+         <tool
+               description="Creates a Combo box"
+               editor="org.protope.designer.web.edit.WComboboxEditPart"
+               id="org.protope.designer.palette.Web.Combobox"
+               label="Combobox"
+               mediumIcon="src/org/protope/designer/web/model/icons/WCombobox24.gif"
+               model="org.protope.designer.web.model.WCombobox"
+               smallIcon="src/org/protope/designer/web/model/icons/WCombobox16.gif">
+         </tool>
       </palette>
    </extension>
 
