@@ -62,6 +62,15 @@
                smallIcon="src/org/protope/designer/web/model/icons/WTextEdit16.gif">
          </tool>
          <tool
+               description="Creates a bigger Text area component similar to the text editor"
+               editor="org.protope.designer.web.edit.WTextAreaEditPart"
+               id="org.protope.designer.palette.Web.TextArea"
+               label="Text Area"
+               mediumIcon="src/org/protope/designer/web/model/icons/WTextArea24.gif"
+               model="org.protope.designer.web.model.WTextArea"
+               smallIcon="src/org/protope/designer/web/model/icons/WTextArea16.gif">
+         </tool>
+         <tool
                description="Creates a Label"
                editor="org.protope.designer.web.edit.WLabelEditPart"
                id="org.protope.designer.palette.Web.Label"
