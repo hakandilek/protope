@@ -115,6 +115,15 @@
                model="org.protope.designer.web.model.WCombobox"
                smallIcon="src/org/protope/designer/web/model/icons/WCombobox16.gif">
          </tool>
+         <tool
+               description="Creates a Table"
+               editor="org.protope.designer.web.edit.WTableEditPart"
+               id="org.protope.designer.palette.Web.Table"
+               label="Table"
+               mediumIcon="src/org/protope/designer/web/model/icons/WTable24.gif"
+               model="org.protope.designer.web.model.WTable"
+               smallIcon="src/org/protope/designer/web/model/icons/WTable16.gif">
+         </tool>
       </palette>
    </extension>
 
