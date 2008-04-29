@@ -20,7 +20,6 @@ public class NewDiagramWizard extends Wizard implements INewWizard {
 		return page1.finish();
 	}
 
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;

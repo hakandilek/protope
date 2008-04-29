@@ -16,7 +16,6 @@ public class WCheckboxProperties extends BasePropertyHandler<WCheckbox> implemen
 		addProperty("text",
 				WebPaletteMessages.WebPalette_Tool_WCheckbox_Property_text,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new StringPropertySource((String) value);
 					}

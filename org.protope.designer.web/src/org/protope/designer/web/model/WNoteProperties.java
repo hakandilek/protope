@@ -16,7 +16,6 @@ public class WNoteProperties extends BasePropertyHandler<WNote> implements
 		addProperty("text",
 				WebPaletteMessages.WebPalette_Tool_WNote_Property_text,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new StringPropertySource((String) value);
 					}

@@ -18,32 +18,26 @@ public class DiagramFlyoutPreferences implements FlyoutPreferences {
 		setPaletteWidth(160);
 	}
 
-	@Override
 	public void setDockLocation(int location) {
 		this.location = location;
 	}
 
-	@Override
 	public void setPaletteState(int state) {
 		this.state = state;
 	}
 
-	@Override
 	public void setPaletteWidth(int width) {
 		this.width = width;
 	}
 
-	@Override
 	public int getDockLocation() {
 		return location;
 	}
 
-	@Override
 	public int getPaletteState() {
 		return state;
 	}
 
-	@Override
 	public int getPaletteWidth() {
 		return width;
 	}

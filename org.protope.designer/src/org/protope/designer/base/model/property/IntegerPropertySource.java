@@ -11,31 +11,25 @@ public class IntegerPropertySource implements IPropertySource {
 		this.value = value;
 	}
 
-	@Override
 	public Object getEditableValue() {
 		return new Integer(value);
 	}
 
-	@Override
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		return new IPropertyDescriptor[0];
 	}
 
-	@Override
 	public Object getPropertyValue(Object propertyName) {
 		return null;
 	}
 
-	@Override
 	public boolean isPropertySet(Object propertyName) {
 		return true;
 	}
 
-	@Override
 	public void resetPropertyValue(Object propertyName) {
 	}
 
-	@Override
 	public void setPropertyValue(Object propertyName, Object value) {
 	}
 
