@@ -16,7 +16,6 @@ public class WComboboxProperties extends BasePropertyHandler<WCombobox> implemen
 		addProperty("text",
 				WebPaletteMessages.WebPalette_Tool_WCombobox_Property_text,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new StringPropertySource((String) value);
 					}

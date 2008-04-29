@@ -18,7 +18,6 @@ public class WButtonProperties extends BasePropertyHandler<WButton> implements
 		addProperty("text",
 				WebPaletteMessages.WebPalette_Tool_WButton_Property_text,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new StringPropertySource((String) value);
 					}
@@ -26,7 +25,6 @@ public class WButtonProperties extends BasePropertyHandler<WButton> implements
 		addProperty("selected",
 				WebPaletteMessages.WebPalette_Tool_WButton_Property_selected,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new BooleanPropertySource((Boolean) value);
 					}

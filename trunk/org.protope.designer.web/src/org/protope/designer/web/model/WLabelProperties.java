@@ -16,7 +16,6 @@ public class WLabelProperties extends BasePropertyHandler<WLabel> implements
 		addProperty("text",
 				WebPaletteMessages.WebPalette_Tool_WLabel_Property_text,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new StringPropertySource((String) value);
 					}

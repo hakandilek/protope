@@ -16,7 +16,6 @@ public class WLinkProperties extends BasePropertyHandler<WLink> implements
 		addProperty("text",
 				WebPaletteMessages.WebPalette_Tool_WLink_Property_text,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new StringPropertySource((String) value);
 					}
@@ -24,7 +23,6 @@ public class WLinkProperties extends BasePropertyHandler<WLink> implements
 		addProperty("target",
 				WebPaletteMessages.WebPalette_Tool_WLink_Property_target,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new StringPropertySource((String) value);
 					}

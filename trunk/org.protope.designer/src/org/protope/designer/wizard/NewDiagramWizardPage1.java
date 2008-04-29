@@ -96,14 +96,12 @@ public class NewDiagramWizardPage1 extends WizardNewFileCreationPage implements
 	/**
 	 * Empty method
 	 */
-	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 	}
 
 	/**
 	 * @see org.eclipse.swt.events.SelectionListener#widgetSelected(SelectionEvent)
 	 */
-	@Override
 	public void widgetSelected(SelectionEvent e) {
 		if (e.getSource() == uiPrototypeButton) {
 			modelSelected = DiagramType.UI;

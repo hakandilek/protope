@@ -16,7 +16,6 @@ public class BasePropertyHandler<T extends UIElementPart> extends PropertySuppor
 		super(subject);
 		addProperty("size", ProtopeMessages.PropertyDescriptor_UISubPart_Size,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new DimensionPropertySource((Dimension) value);
 					}
@@ -24,7 +23,6 @@ public class BasePropertyHandler<T extends UIElementPart> extends PropertySuppor
 		addProperty("location",
 				ProtopeMessages.PropertyDescriptor_UISubPart_Location,
 				new PropertySourceFactory() {
-					@Override
 					public IPropertySource create(Object value) {
 						return new LocationPropertySource((Point) value);
 					}

@@ -19,17 +19,14 @@ public class SWTImageExporter implements ImageExporter {
 		this.extension = extension;
 	}
 
-	@Override
 	public String getFileExtension() {
 		return extension;
 	}
 
-	@Override
 	public String getName() {
 		return name;
 	}
 
-	@Override
 	public void export(Image image, OutputStream outputStream) {
 		final ImageLoader imageLoader = new ImageLoader();
 		final int format = getSWTFormat();

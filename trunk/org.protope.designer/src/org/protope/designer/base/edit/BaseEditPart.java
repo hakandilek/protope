@@ -111,24 +111,20 @@ abstract public class BaseEditPart extends
 				getFigure(), r);
 	}
 
-	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(
 			ConnectionEditPart connection) {
 		return null;
 	}
 
-	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(Request request) {
 		return null;
 	}
 
-	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(
 			ConnectionEditPart connection) {
 		return null;
 	}
 
-	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(Request request) {
 		return null;
 	}

@@ -11,12 +11,10 @@ public class ToolDefinitionFactory implements CreationFactory {
 		this.toolDefinition = toolDefinition;
 	}
 
-	@Override
 	public Object getNewObject() {
 		return toolDefinition.getModel();
 	}
 
-	@Override
 	public Object getObjectType() {
 		return toolDefinition.getModel().getClass();
 	}
