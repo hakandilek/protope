@@ -17,7 +17,7 @@ public class WTableFigure extends Figure {
 	final static Color COLOR_ROW_EVEN = new Color(
 			ColorConstants.tooltipBackground.getDevice(), 255, 255, 255);
 	final static Color COLOR_ROW_ODD = new Color(
-			ColorConstants.tooltipBackground.getDevice(), 222, 222, 222);
+			ColorConstants.tooltipBackground.getDevice(), 247, 247, 247);
 
 	private Integer columnCount;
 	private Integer rowCount;
@@ -32,22 +32,38 @@ public class WTableFigure extends Figure {
 		graphics.setForegroundColor(COLOR_OUTER_FRAME);
 		graphics.drawRectangle(0, 0, rect.width - 1, rect.height - 1);
 
-		// draw column headers
-		final int headerHeight = 16;
-		graphics.setBackgroundColor(COLOR_INNER_FRAME);
-		graphics.setForegroundColor(COLOR_INNER_FRAME);
+		// fill header
+		final int headerHeight = 24;
+		graphics.setBackgroundColor(COLOR_HEADER);
 		graphics.fillRectangle(1, 1, rect.width - 2, headerHeight);
-		graphics.setForegroundColor(COLOR_HEADER);
-		final int width = (rect.width - 3) / columnCount;
-		final int height = headerHeight - 1;
+
+		// fill rows
+		graphics.setBackgroundColor(COLOR_ROW_ODD);
+		graphics.fillRectangle(1, headerHeight + 1, rect.width - 2, rect.height
+				- headerHeight - 2);
+
+		// draw vertical lines
+		graphics.setForegroundColor(COLOR_INNER_FRAME);
+		final int colWidth = (rect.width - 3) / columnCount;
+		final int height = rect.height - 3;
 		int x = 1;
 		for (int col = 0; col < columnCount; col++) {
-			final int x1 = x;
-			x = x1 + width;
-			final int wid = col < columnCount - 1 ? width : rect.width - x1 - 2;
-			Rectangle colrec = new Rectangle(x1, 1, wid, height);
-			graphics.drawRectangle(colrec);
+			graphics.drawLine(x, 1, x, height);
+			x += colWidth;
 		}
+		graphics.drawLine(rect.width - 2, 1, rect.width - 2, height);
+
+		// draw horizontal lines
+		final int width = rect.width - 2;
+		final int rowHeight = (rect.height - headerHeight - 3) / rowCount;
+		int y = headerHeight;
+		graphics.drawLine(1, 1, width, 1);// top line
+		for (int row = 0; row < rowCount; row++) {
+			graphics.drawLine(1, y, width, y);
+			y += rowHeight;
+		}
+		graphics.drawLine(1, rect.height - 2, width, rect.height - 2);// bottom
+
 		graphics.translate(getLocation().getNegated());
 	}
 
