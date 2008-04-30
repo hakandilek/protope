@@ -18,8 +18,8 @@ public class WImage extends UIElementPart {
 
 	public WImage() {
 		super();
-		size.width = 50;
-		size.height = 50;
+		size.width = 100;
+		size.height = 100;
 	}
 
 	public Image getIconImage() {
